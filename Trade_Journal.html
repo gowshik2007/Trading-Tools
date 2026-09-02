@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trade Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0c10; --panel:#12151b; --panel-hi:#161a21; --border:#242a33; --border-soft:#1c212a;
+  --text:#f2f3f4; --muted:#8b929c; --faint:#565d67;
+  --gold:#d4a44c; --gold-hi:#ecc772;
+  --green:#3ecf8e; --green-soft:rgba(62,207,142,.12);
+  --red:#f0605e; --red-soft:rgba(240,96,94,.12);
+  --radius-lg:18px; --radius-md:12px; --radius-sm:8px;
+  --shadow:0 24px 48px -20px rgba(0,0,0,.55);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:
+    radial-gradient(1100px 600px at 85% -10%, rgba(212,164,76,.07), transparent 60%),
+    var(--bg);
+  color:var(--text);
+  font-family:'Inter',ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+.num-font{font-family:'IBM Plex Mono',ui-monospace,monospace}
+
+.main{max-width:1240px;width:100%;margin:0 auto;padding:36px 32px 60px}
+
+/* header */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:28px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:700;letter-spacing:-.2px}
+.brand .mark{color:var(--gold-hi);font-size:22px;line-height:1}
+.month-nav{display:flex;align-items:center;gap:10px}
+.month-title{font-size:22px;font-weight:700;letter-spacing:-.2px;min-width:180px;text-align:center}
+.icon-btn,.today-btn{
+  border:1px solid var(--border);background:var(--panel);color:#d7dade;
+  border-radius:var(--radius-sm);padding:9px 13px;transition:background .15s ease,border-color .15s ease;
+}
+.icon-btn:hover,.today-btn:hover{background:var(--panel-hi);border-color:#343b46}
+.today-btn{color:var(--gold-hi);border-color:#5a4620;font-weight:600}
+
+/* layout */
+.dashboard{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,1fr);gap:20px;align-items:start}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow)}
+.side{display:flex;flex-direction:column;gap:16px}
+
+/* calendar */
+.calendar-card{padding:18px}
+.week{display:grid;grid-template-columns:repeat(7,1fr);color:var(--faint);font-size:12px;font-weight:600;text-align:center;padding:2px 4px 12px}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.day{
+  min-height:86px;border:1px solid var(--border-soft);border-radius:var(--radius-md);
+  padding:10px;position:relative;cursor:pointer;background:#0e1116;
+  transition:background .15s ease,border-color .15s ease,transform .1s ease;
+}
+.day:hover{background:var(--panel-hi);border-color:#2c333e;transform:translateY(-1px)}
+.day.other{color:var(--faint);background:#0b0d11;border-color:#171b21}
+.day.other:hover{transform:none;background:#0d1015}
+.day.today{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+.day.selected{background:#1a1710;border-color:#5a4620}
+.num{font-size:13px;color:#c7cbd0}
+.day.other .num{color:var(--faint)}
+.pnl{position:absolute;left:10px;bottom:9px;font-size:12.5px;font-weight:700}
+.win{color:var(--green)}.loss{color:var(--red)}
+.hint{color:var(--faint);font-size:12.5px;padding:14px 2px 2px}
+
+/* balance card */
+.balance-card{padding:18px}
+.label{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:9px}
+input{width:100%;background:#0d1015;border:1px solid #2b3138;border-radius:var(--radius-sm);color:var(--text);padding:11px 12px;outline:none;transition:border-color .15s ease}
+input:focus{border-color:var(--gold)}
+.balance-row{display:flex;gap:8px}
+.balance-row input{flex:1}
+.gold-btn{
+  background:linear-gradient(180deg,var(--gold-hi),var(--gold));
+  border:0;color:#1a1408;border-radius:var(--radius-sm);padding:0 16px;font-weight:700;font-size:13.5px;
+  white-space:nowrap;
+}
+.balance-hint{color:var(--faint);font-size:12px;margin-top:9px;line-height:1.5}
+
+/* stats */
+.stats{padding:18px}
+.section-title{font-size:14.5px;font-weight:700;margin-bottom:14px;letter-spacing:-.1px}
+.balance-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.stat{border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:14px;background:#0e1116}
+.stat small{display:block;color:var(--muted);font-size:11.5px;font-weight:600;margin-bottom:7px}
+.stat strong{font-size:19px;font-weight:700}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.metrics .stat{padding:12px}
+.metrics .stat strong{font-size:16.5px}
+
+/* trades list */
+.trades-card{padding:18px;max-height:360px;overflow:auto}
+.trade{display:grid;grid-template-columns:1fr 88px 56px 22px;gap:10px;align-items:center;border-top:1px solid var(--border-soft);padding:11px 2px;font-size:13px}
+.trade:first-of-type{border-top:0}
+.delete{background:none;border:0;color:var(--faint);font-size:16px;border-radius:6px;padding:2px 6px}
+.delete:hover{color:var(--red)}
+.empty{color:var(--faint);text-align:center;padding:26px 5px;font-size:13.5px}
+
+/* reset */
+.reset-card{
+  margin-top:20px;border:1px solid var(--border);background:var(--panel);border-radius:var(--radius-lg);
+  padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+}
+.reset-card strong{font-size:13.5px;font-weight:600}
+.reset-card p{margin:4px 0 0;color:var(--muted);font-size:12px}
+.reset-btn{background:transparent;border:1px solid #5c2a2a;color:#f0938f;padding:9px 16px;border-radius:var(--radius-sm);font-weight:600;font-size:13px;transition:background .15s ease}
+.reset-btn:hover{background:var(--red-soft)}
+
+/* modal */
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(5,6,8,.72);align-items:center;justify-content:center;padding:20px;z-index:5;backdrop-filter:blur(2px)}
+.modal{width:min(420px,100%);background:var(--panel-hi);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow)}
+.modal h2{margin:0 0 6px;font-size:18px}
+.modal p{color:var(--muted);font-size:13px;margin:0 0 16px;line-height:1.5}
+.modal-actions{display:flex;gap:10px;margin-top:18px}
+.modal-actions button{flex:1;padding:11px;border-radius:var(--radius-sm);font-weight:700;font-size:13.5px}
+.cancel{background:#181c22;color:#d8dade;border:1px solid var(--border)}
+.save{background:linear-gradient(180deg,var(--gold-hi),var(--gold));border:0;color:#1a1408}
+
+@media(max-width:1050px){
+  .main{padding:22px 18px 48px}
+  .dashboard{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .month-title{font-size:19px;min-width:150px}
+  .day{min-height:66px;padding:8px}
+  .pnl{left:8px;bottom:7px;font-size:11px}
+  .metrics{grid-template-columns:1fr 1fr}
+  .trade{grid-template-columns:1fr 74px 50px 20px}
+}
+</style>
+</head>
+<body>
+<main class="main">
+  <div class="topbar">
+    <div class="brand"><span class="mark">▥</span> Trade Journal</div>
+    <div class="month-nav">
+      <button class="icon-btn" id="prev">‹</button>
+      <div class="month-title" id="monthTitle"></div>
+      <button class="icon-btn" id="next">›</button>
+      <button class="today-btn" id="today">Today</button>
+    </div>
+  </div>
+
+  <div class="dashboard">
+    <section>
+      <div class="card calendar-card">
+        <div class="week"><div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div></div>
+        <div class="calendar" id="calendar"></div>
+        <div class="hint">Click any date to log or update your trade.</div>
+      </div>
+    </section>
+
+    <section class="side">
+      <div class="card balance-card">
+        <div class="label">ACCOUNT STARTING BALANCE</div>
+        <div class="balance-row">
+          <input id="startingBalance" type="number" min="0" step="0.01" placeholder="10000">
+          <button class="gold-btn" id="saveBalance">Save</button>
+        </div>
+      </div>
+
+      <div class="card stats">
+        <div class="section-title">Monthly Performance</div>
+        <div class="balance-grid">
+          <div class="stat"><small>MONTH START</small><strong class="num-font" id="monthStart">—</strong></div>
+          <div class="stat"><small>MONTH END</small><strong class="num-font" id="monthEnd">—</strong></div>
+        </div>
+        <div class="metrics">
+          <div class="stat"><small>TOTAL P&L</small><strong class="num-font" id="totalPnl">—</strong></div>
+          <div class="stat"><small>WIN RATE</small><strong class="num-font" id="winRate">—</strong></div>
+          <div class="stat"><small>WINS</small><strong class="num-font" id="wins">0</strong></div>
+          <div class="stat"><small>LOSSES</small><strong class="num-font" id="losses">0</strong></div>
+        </div>
+      </div>
+
+      <div class="card trades-card">
+        <div class="section-title">Trades for <span id="tradeMonth"></span></div>
+        <div id="tradeList"></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="reset-card">
+    <div><strong>Reset all data</strong><p>Permanently clears the starting balance and every trade stored in this browser.</p></div>
+    <button class="reset-btn" id="reset">Reset Journal</button>
+  </div>
+</main>
+
+<div class="modal-backdrop" id="modal">
+  <div class="modal">
+    <h2 id="modalTitle">Log Trade</h2>
+    <p>Enter the P&L for this date. Use a positive number for a win and a negative number for a loss.</p>
+    <input id="modalInput" type="number" step="0.01" placeholder="e.g. 250 or -100">
+    <div class="modal-actions"><button class="cancel" id="cancel">Cancel</button><button class="save" id="modalSave">Save Trade</button></div>
+  </div>
+</div>
+
+<script>
+const KEY="tradeJournal_v1";
+let data=JSON.parse(localStorage.getItem(KEY)||'{"startingBalance":0,"trades":{}}');
+let view=new Date(); view.setDate(1);
+let selectedDate=localDate(new Date());
+
+function localDate(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function save(){localStorage.setItem(KEY,JSON.stringify(data))}
+function money(n){return new Intl.NumberFormat(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}).format(n)}
+function fmtPnl(n){return (n>=0?"+":"-")+"$"+money(Math.abs(n))}
+function monthKey(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`}
+function monthName(d){return d.toLocaleString(undefined,{month:"long",year:"numeric"})}
+function sortedTrades(){return Object.entries(data.trades).sort((a,b)=>a[0].localeCompare(b[0]))}
+function balanceBefore(key){
+  let bal=Number(data.startingBalance)||0;
+  for(const [date,t] of sortedTrades()){
+    if(date<key) bal+=Number(t.pnl);
+  }
+  return bal;
+}
+function monthStats(){
+  const key=monthKey(view), entries=sortedTrades().filter(([date])=>date.startsWith(key));
+  const start=balanceBefore(`${key}-01`);
+  const pnl=entries.reduce((s,[,t])=>s+Number(t.pnl),0);
+  const wins=entries.filter(([,t])=>Number(t.pnl)>0).length;
+  const losses=entries.filter(([,t])=>Number(t.pnl)<0).length;
+  return {entries,start,end:start+pnl,pnl,wins,losses};
+}
+function render(){
+  document.getElementById("monthTitle").textContent=monthName(view);
+  document.getElementById("tradeMonth").textContent=monthName(view);
+  document.getElementById("startingBalance").value=data.startingBalance||"";
+  renderCalendar(); renderStats(); renderTrades();
+}
+function renderCalendar(){
+  const cal=document.getElementById("calendar"); cal.innerHTML="";
+  const y=view.getFullYear(), m=view.getMonth();
+  const first=new Date(y,m,1), days=new Date(y,m+1,0).getDate();
+  const prevDays=new Date(y,m,0).getDate();
+  const total=Math.ceil((first.getDay()+days)/7)*7;
+  const today=localDate(new Date());
+  for(let i=0;i<total;i++){
+    let n=i-first.getDay()+1, d, other=false;
+    if(n<1){n=prevDays+n; d=new Date(y,m-1,n); other=true}
+    else if(n>days){n=n-days; d=new Date(y,m+1,n); other=true}
+    else d=new Date(y,m,n);
+    const key=localDate(d), trade=data.trades[key];
+    const el=document.createElement("div"); el.className="day"+(other?" other ":" ")+(key===today?"today ":"")+(key===selectedDate?"selected":"");
+    el.innerHTML=`<div class="num">${n}</div>${trade?`<div class="pnl ${trade.pnl>=0?"win":"loss"}">${fmtPnl(Number(trade.pnl))}</div>`:""}`;
+    if(trade) el.title=trade.pnl>=0?"Win":"Loss";
+    el.onclick=()=>{selectedDate=key; if(!other){openModal(key)} else {view=new Date(d);view.setDate(1);openModal(key)}};
+    cal.appendChild(el);
+  }
+}
+function renderStats(){
+  const s=monthStats();
+  document.getElementById("monthStart").textContent="$"+money(s.start);
+  document.getElementById("monthEnd").textContent="$"+money(s.end);
+  const pnl=document.getElementById("totalPnl"); pnl.textContent=fmtPnl(s.pnl); pnl.className="num-font "+(s.pnl>=0?"win":"loss");
+  document.getElementById("winRate").textContent=(s.wins+s.losses?((s.wins/(s.wins+s.losses))*100).toFixed(2):"0.00")+"%";
+  document.getElementById("wins").textContent=s.wins; document.getElementById("losses").textContent=s.losses;
+}
+function renderTrades(){
+  const box=document.getElementById("tradeList"), entries=monthStats().entries.sort((a,b)=>b[0].localeCompare(a[0]));
+  if(!entries.length){box.innerHTML='<div class="empty">No trades logged this month.</div>';return}
+  box.innerHTML=entries.map(([date,t])=>{
+    const d=new Date(date+"T00:00:00");
+    return `<div class="trade"><div>${d.toLocaleDateString(undefined,{month:"short",day:"2-digit",year:"numeric"})}</div><div class="num-font ${t.pnl>=0?"win":"loss"}">${fmtPnl(Number(t.pnl))}</div><div class="${t.pnl>=0?"win":"loss"}">${t.pnl>=0?"Win":"Loss"}</div><button class="delete" onclick="deleteTrade('${date}')">×</button></div>`
+  }).join("");
+}
+function openModal(key){
+  selectedDate=key;
+  document.getElementById("modalTitle").textContent="Log Trade — "+new Date(key+"T00:00:00").toLocaleDateString(undefined,{month:"long",day:"numeric",year:"numeric"});
+  document.getElementById("modalInput").value=data.trades[key]?.pnl??"";
+  document.getElementById("modal").style.display="flex";
+  setTimeout(()=>document.getElementById("modalInput").focus(),50);
+}
+function closeModal(){document.getElementById("modal").style.display="none"}
+function storeTrade(key,val){
+  const n=Number(val);
+  if(!Number.isFinite(n)){alert("Please enter a valid P&L amount.");return}
+  if(n===0){delete data.trades[key]} else data.trades[key]={pnl:n};
+  save(); closeModal(); render();
+}
+function deleteTrade(key){if(confirm("Delete this trade?")){delete data.trades[key];save();render()}}
+document.getElementById("prev").onclick=()=>{view.setMonth(view.getMonth()-1);render()}
+document.getElementById("next").onclick=()=>{view.setMonth(view.getMonth()+1);render()}
+document.getElementById("today").onclick=()=>{const now=new Date();view=new Date(now.getFullYear(),now.getMonth(),1);selectedDate=localDate(now);render()}
+document.getElementById("saveBalance").onclick=()=>{
+  const n=Number(document.getElementById("startingBalance").value);
+  if(!Number.isFinite(n)||n<0){alert("Enter a valid starting balance.");return}
+  data.startingBalance=n;save();render()
+}
+document.getElementById("modalSave").onclick=()=>storeTrade(selectedDate,document.getElementById("modalInput").value)
+document.getElementById("cancel").onclick=closeModal
+document.getElementById("modal").onclick=e=>{if(e.target.id==="modal")closeModal()}
+document.getElementById("modalInput").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("modalSave").click()})
+document.getElementById("reset").onclick=()=>{
+  if(confirm("Reset everything? Your starting balance and ALL trades will be permanently deleted from this browser.")){
+    localStorage.removeItem(KEY);data={startingBalance:0,trades:{}};selectedDate=localDate(new Date());view=new Date();view.setDate(1);render()
+  }
+}
+render();
+</script>
+</body>
+</html>

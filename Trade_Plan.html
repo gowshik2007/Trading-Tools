@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rules to Trade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0C0E;
+    --panel:#14181C;
+    --border:#262C31;
+    --amber:#E3A857;
+    --green:#4F9D6E;
+    --green-fill:rgba(79,157,110,0.10);
+    --text:#EDEBE4;
+    --text-2:#9BA0A6;
+    --text-3:#5E6469;
+    --mono:'IBM Plex Mono', monospace;
+    --display:'Space Grotesk', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--mono);
+    font-size:14px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:56px 24px 80px;
+  }
+  h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:26px;
+    letter-spacing:-0.01em;
+    margin:0 0 32px;
+  }
+  .progress-tag{
+    float:right;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--text-2);
+    background:var(--panel);
+    border:1px solid var(--border);
+    padding:5px 11px;
+    border-radius:6px;
+    margin-top:4px;
+  }
+  .progress-tag b{ color:var(--amber); font-weight:600; }
+
+  .grid{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .step{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:18px 22px;
+    display:flex;
+    align-items:flex-start;
+    gap:18px;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .step:hover{ border-color:#333a40; }
+  .step.checked{
+    border-color:rgba(79,157,110,0.4);
+    background:var(--green-fill);
+  }
+  .step-num{
+    font-family:var(--display);
+    font-size:13px;
+    font-weight:600;
+    color:var(--text-3);
+    min-width:20px;
+    padding-top:2px;
+  }
+  .step.checked .step-num{ color:var(--green); }
+  .step-text{
+    flex:1;
+    font-size:14.5px;
+    color:var(--text);
+    padding-top:1px;
+    transition:color .15s ease;
+  }
+  .step.checked .step-text{
+    text-decoration:line-through;
+    text-decoration-color:var(--green);
+    text-decoration-thickness:1.5px;
+    color:var(--text-2);
+  }
+  .checkbox{
+    width:20px; height:20px;
+    border-radius:5px;
+    border:1.5px solid var(--border);
+    background:var(--bg);
+    flex-shrink:0;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:transparent;
+    font-size:13px;
+    transition:all .12s ease;
+  }
+  .checkbox:hover{ border-color:var(--amber); }
+  .checkbox.on{
+    background:var(--green);
+    border-color:var(--green);
+    color:#0A0C0E;
+  }
+  .reset-row{
+    display:flex;
+    justify-content:center;
+    margin-top:24px;
+  }
+  .btn{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.03em;
+    padding:9px 18px;
+    border-radius:6px;
+    cursor:pointer;
+    border:1px solid var(--border);
+    background:transparent;
+    color:var(--text-2);
+    transition:all .12s ease;
+  }
+  .btn:hover{ border-color:var(--amber); color:var(--amber); }
+
+  @media (max-width:640px){
+    .wrap{ padding:40px 16px 64px; }
+    .step{ padding:14px 16px; gap:14px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Rules to Trade</h1>
+  <div class="progress-tag"><b id="progress-count">0</b>/7</div>
+  <div style="clear:both;height:24px;"></div>
+
+  <div class="grid">
+  <div class="step" data-step="1">
+    <div class="checkbox" data-check="1"></div>
+    <div class="step-num">01</div>
+    <div class="step-text">Trade only in London &amp; New York overlap (5.30 to 9.30)</div>
+  </div>
+
+  <div class="step" data-step="2">
+    <div class="checkbox" data-check="2"></div>
+    <div class="step-num">02</div>
+    <div class="step-text">Identify the recent BOS / MS</div>
+  </div>
+
+  <div class="step" data-step="3">
+    <div class="checkbox" data-check="3"></div>
+    <div class="step-num">03</div>
+    <div class="step-text">Identify the liquidity sweep zone which caused BOS / MS</div>
+  </div>
+
+  <div class="step" data-step="4">
+    <div class="checkbox" data-check="4"></div>
+    <div class="step-num">04</div>
+    <div class="step-text">Set limit order on the edge of the zone and SL behind it</div>
+  </div>
+
+  <div class="step" data-step="5">
+    <div class="checkbox" data-check="5"></div>
+    <div class="step-num">05</div>
+    <div class="step-text">Wait for the price to come to your point of interest</div>
+  </div>
+
+  <div class="step" data-step="6">
+    <div class="checkbox" data-check="6"></div>
+    <div class="step-num">06</div>
+    <div class="step-text">If price does not do what you expected, close the laptop or do anything other than trading</div>
+  </div>
+
+  <div class="step" data-step="7">
+    <div class="checkbox" data-check="7"></div>
+    <div class="step-num">07</div>
+    <div class="step-text">TP / SL — only one single trade per day, no excuse for yourself to take another trade</div>
+  </div>
+  </div>
+
+  <div class="reset-row">
+    <button class="btn" id="reset-btn">Reset</button>
+  </div>
+
+</div>
+
+<script>
+  const checks = document.querySelectorAll('.checkbox');
+  const progressCount = document.getElementById('progress-count');
+  function updateProgress(){
+    progressCount.textContent = document.querySelectorAll('.checkbox.on').length;
+  }
+  checks.forEach(cb=>{
+    cb.addEventListener('click', ()=>{
+      cb.classList.toggle('on');
+      cb.textContent = cb.classList.contains('on') ? '\u2713' : '';
+      cb.closest('.step').classList.toggle('checked', cb.classList.contains('on'));
+      updateProgress();
+    });
+  });
+  document.getElementById('reset-btn').addEventListener('click', ()=>{
+    checks.forEach(cb=>{
+      cb.classList.remove('on');
+      cb.textContent = '';
+      cb.closest('.step').classList.remove('checked');
+    });
+    updateProgress();
+  });
+</script>
+</body>
+</html>
