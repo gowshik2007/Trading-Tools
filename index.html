@@ -3,80 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Trading Dashboard</title>
 
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            color: #222;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #080808;
+            color: #ffffff;
             min-height: 100vh;
+
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
         }
 
         .container {
             width: 90%;
-            max-width: 700px;
+            max-width: 850px;
             text-align: center;
         }
 
         h1 {
-            font-size: 36px;
+            font-size: 42px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #d4af37;
             margin-bottom: 10px;
         }
 
         .subtitle {
-            color: #777;
-            margin-bottom: 40px;
+            color: #888;
+            font-size: 15px;
+            margin-bottom: 45px;
         }
 
         .cards {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             justify-content: center;
         }
 
         .card {
             flex: 1;
-            background: white;
-            padding: 35px 25px;
+            min-height: 210px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            background: #101010;
+            border: 1px solid #d4af37;
             border-radius: 20px;
+
             text-decoration: none;
-            color: #222;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-            transition: 0.25s ease;
+            color: #ffffff;
+
+            padding: 30px;
+
+            transition: all 0.3s ease;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+            transform: translateY(-6px);
+
+            background: #141414;
+
+            box-shadow:
+                0 0 15px rgba(212, 175, 55, 0.15),
+                0 0 35px rgba(212, 175, 55, 0.08);
         }
 
         .icon {
-            font-size: 40px;
-            margin-bottom: 15px;
+            font-size: 42px;
+            margin-bottom: 18px;
         }
 
         .card h2 {
-            margin-bottom: 8px;
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 10px;
         }
 
         .card p {
-            color: #777;
+            color: #888;
             font-size: 14px;
         }
 
+        /* Mobile */
         @media (max-width: 600px) {
+
+            body {
+                padding: 30px 0;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
             .cards {
                 flex-direction: column;
+            }
+
+            .card {
+                min-height: 180px;
             }
         }
     </style>
@@ -87,20 +124,36 @@
     <div class="container">
 
         <h1>Trading Dashboard</h1>
-        <p class="subtitle">Your trading workspace</p>
+
+        <p class="subtitle">
+            Your trading workspace
+        </p>
 
         <div class="cards">
 
             <a href="Trade_Journal.html" class="card">
+
                 <div class="icon">📊</div>
+
                 <h2>Trade Journal</h2>
-                <p>Track and review your trades</p>
+
+                <p>
+                    Track and review your trades
+                </p>
+
             </a>
 
+
             <a href="Trade_Plan.html" class="card">
+
                 <div class="icon">📋</div>
+
                 <h2>Trade Plan</h2>
-                <p>Review your rules before trading</p>
+
+                <p>
+                    Review your rules before trading
+                </p>
+
             </a>
 
         </div>
