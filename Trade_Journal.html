@@ -6,6 +6,7 @@
 <title>Trade Journal</title>
 
 <style>
+
 :root{
   --bg:#0a0c10;
   --panel:#12151b;
@@ -50,7 +51,10 @@ button{
   margin:35px auto;
 }
 
-/* HEADER */
+
+/* =========================
+   HEADER
+========================= */
 
 .header{
   display:flex;
@@ -85,7 +89,10 @@ button{
   margin-top:2px;
 }
 
-/* MAIN */
+
+/* =========================
+   MAIN
+========================= */
 
 .dashboard{
   display:grid;
@@ -100,7 +107,10 @@ button{
   box-shadow:var(--shadow);
 }
 
-/* CALENDAR */
+
+/* =========================
+   CALENDAR
+========================= */
 
 .calendar-card{
   padding:22px;
@@ -220,7 +230,10 @@ button{
   color:var(--muted);
 }
 
-/* RIGHT SIDE */
+
+/* =========================
+   RIGHT SIDE
+========================= */
 
 .side{
   display:flex;
@@ -228,7 +241,10 @@ button{
   gap:16px;
 }
 
-/* BALANCE */
+
+/* =========================
+   BALANCE / SETTINGS
+========================= */
 
 .balance-card{
   padding:20px;
@@ -287,7 +303,10 @@ input:focus{
   background:var(--gold-hi);
 }
 
-/* SAVED SETTINGS */
+
+/* =========================
+   SAVED SETTINGS
+========================= */
 
 .saved-settings{
   display:none;
@@ -335,7 +354,10 @@ input:focus{
   color:var(--gold-hi);
 }
 
-/* STATS */
+
+/* =========================
+   STATS
+========================= */
 
 .stats{
   padding:20px;
@@ -368,7 +390,10 @@ input:focus{
   font-weight:700;
 }
 
-/* DAILY LOSS */
+
+/* =========================
+   DAILY LOSS
+========================= */
 
 .daily-loss-card{
   padding:20px;
@@ -427,7 +452,10 @@ input:focus{
   display:block;
 }
 
-/* TRADES */
+
+/* =========================
+   TRADES
+========================= */
 
 .trades-card{
   padding:20px;
@@ -485,52 +513,10 @@ input:focus{
   padding:15px 0;
 }
 
-/* BOTTOM SETTINGS */
 
-.settings-bottom{
-  margin-top:22px;
-  padding:18px 20px;
-  border-radius:16px;
-  border:1px solid var(--border);
-  background:var(--panel);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-}
-
-.settings-bottom-text{
-  display:flex;
-  flex-direction:column;
-  gap:3px;
-}
-
-.settings-bottom-title{
-  font-size:13px;
-  font-weight:700;
-}
-
-.settings-bottom-subtitle{
-  font-size:11px;
-  color:var(--faint);
-}
-
-.bottom-edit-btn{
-  height:38px;
-  padding:0 16px;
-  border-radius:10px;
-  border:1px solid var(--border);
-  background:var(--panel-hi);
-  color:var(--muted);
-  white-space:nowrap;
-}
-
-.bottom-edit-btn:hover{
-  border-color:var(--gold);
-  color:var(--gold-hi);
-}
-
-/* MODAL */
+/* =========================
+   MODAL
+========================= */
 
 .modal{
   position:fixed;
@@ -596,12 +582,17 @@ input:focus{
   font-weight:700;
 }
 
-/* RESPONSIVE */
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(max-width:1050px){
+
   .dashboard{
     grid-template-columns:1fr;
   }
+
 }
 
 @media(max-width:600px){
@@ -621,15 +612,8 @@ input:focus{
     font-size:11px;
   }
 
-  .settings-bottom{
-    align-items:flex-start;
-    flex-direction:column;
-  }
-
-  .bottom-edit-btn{
-    width:100%;
-  }
 }
+
 </style>
 </head>
 
@@ -640,14 +624,29 @@ input:focus{
   <!-- HEADER -->
 
   <div class="header">
+
     <div class="brand">
-      <img src="logo.png" class="logo" alt="Logo">
+
+      <img
+        src="logo.png"
+        class="logo"
+        alt="Logo"
+      >
 
       <div>
-        <div class="title">Trade Journal</div>
-        <div class="subtitle">Track your performance. Stay disciplined.</div>
+
+        <div class="title">
+          Trade Journal
+        </div>
+
+        <div class="subtitle">
+          Track your performance. Stay disciplined.
+        </div>
+
       </div>
+
     </div>
+
   </div>
 
 
@@ -655,23 +654,45 @@ input:focus{
 
   <div class="dashboard">
 
+
     <!-- CALENDAR -->
 
     <div class="card calendar-card">
 
       <div class="calendar-top">
 
-        <div class="month-title" id="monthTitle"></div>
+        <div
+          class="month-title"
+          id="monthTitle">
+        </div>
 
         <div class="calendar-actions">
-          <button class="icon-btn" id="prevMonth">‹</button>
-          <button class="today-btn" id="todayBtn">Today</button>
-          <button class="icon-btn" id="nextMonth">›</button>
+
+          <button
+            class="icon-btn"
+            id="prevMonth">
+            ‹
+          </button>
+
+          <button
+            class="today-btn"
+            id="todayBtn">
+            Today
+          </button>
+
+          <button
+            class="icon-btn"
+            id="nextMonth">
+            ›
+          </button>
+
         </div>
 
       </div>
 
+
       <div class="weekdays">
+
         <div>MON</div>
         <div>TUE</div>
         <div>WED</div>
@@ -679,9 +700,14 @@ input:focus{
         <div>FRI</div>
         <div>SAT</div>
         <div>SUN</div>
+
       </div>
 
-      <div class="calendar-grid" id="calendarGrid"></div>
+
+      <div
+        class="calendar-grid"
+        id="calendarGrid">
+      </div>
 
     </div>
 
@@ -690,11 +716,15 @@ input:focus{
 
     <div class="side">
 
-      <!-- BALANCE / SETTINGS -->
+
+      <!-- ACCOUNT SETTINGS -->
 
       <div class="card balance-card">
 
-        <div class="section-title">Account Settings</div>
+        <div class="section-title">
+          Account Settings
+        </div>
+
 
         <!-- EDITABLE FORM -->
 
@@ -702,7 +732,9 @@ input:focus{
 
           <div class="input-group">
 
-            <div class="label">STARTING BALANCE</div>
+            <div class="label">
+              STARTING BALANCE
+            </div>
 
             <div class="input-row">
 
@@ -714,7 +746,9 @@ input:focus{
                 placeholder="5000"
               >
 
-              <button class="gold-btn" id="saveBalance">
+              <button
+                class="gold-btn"
+                id="saveBalance">
                 Save
               </button>
 
@@ -725,7 +759,9 @@ input:focus{
 
           <div class="input-group">
 
-            <div class="label">MAX DAILY LOSS</div>
+            <div class="label">
+              MAX DAILY LOSS
+            </div>
 
             <div class="input-row">
 
@@ -737,7 +773,9 @@ input:focus{
                 placeholder="100"
               >
 
-              <button class="gold-btn" id="saveDailyLoss">
+              <button
+                class="gold-btn"
+                id="saveDailyLoss">
                 Save
               </button>
 
@@ -750,7 +788,9 @@ input:focus{
 
         <!-- SAVED VALUES -->
 
-        <div class="saved-settings" id="savedSettings">
+        <div
+          class="saved-settings"
+          id="savedSettings">
 
           <div class="setting-row">
 
@@ -758,7 +798,9 @@ input:focus{
               Starting Balance
             </span>
 
-            <span class="setting-value" id="savedBalance">
+            <span
+              class="setting-value"
+              id="savedBalance">
               $0.00
             </span>
 
@@ -771,14 +813,18 @@ input:focus{
               Max Daily Loss
             </span>
 
-            <span class="setting-value" id="savedDailyLoss">
+            <span
+              class="setting-value"
+              id="savedDailyLoss">
               $0.00
             </span>
 
           </div>
 
 
-          <button class="edit-settings" id="editSettings">
+          <button
+            class="edit-settings"
+            id="editSettings">
             Edit Settings
           </button>
 
@@ -795,36 +841,96 @@ input:focus{
           Monthly Performance
         </div>
 
+
         <div class="stats-grid">
 
           <div class="stat">
-            <div class="stat-label">Month Start</div>
-            <div class="stat-value" id="monthStart">$0.00</div>
+
+            <div class="stat-label">
+              Month Start
+            </div>
+
+            <div
+              class="stat-value"
+              id="monthStart">
+              $0.00
+            </div>
+
           </div>
 
-          <div class="stat">
-            <div class="stat-label">Month End</div>
-            <div class="stat-value" id="monthEnd">$0.00</div>
-          </div>
 
           <div class="stat">
-            <div class="stat-label">Total P&L</div>
-            <div class="stat-value" id="monthPnl">$0.00</div>
+
+            <div class="stat-label">
+              Month End
+            </div>
+
+            <div
+              class="stat-value"
+              id="monthEnd">
+              $0.00
+            </div>
+
           </div>
 
-          <div class="stat">
-            <div class="stat-label">Win Rate</div>
-            <div class="stat-value" id="winRate">0%</div>
-          </div>
 
           <div class="stat">
-            <div class="stat-label">Wins</div>
-            <div class="stat-value win" id="wins">0</div>
+
+            <div class="stat-label">
+              Total P&L
+            </div>
+
+            <div
+              class="stat-value"
+              id="monthPnl">
+              $0.00
+            </div>
+
           </div>
 
+
           <div class="stat">
-            <div class="stat-label">Losses</div>
-            <div class="stat-value loss" id="losses">0</div>
+
+            <div class="stat-label">
+              Win Rate
+            </div>
+
+            <div
+              class="stat-value"
+              id="winRate">
+              0%
+            </div>
+
+          </div>
+
+
+          <div class="stat">
+
+            <div class="stat-label">
+              Wins
+            </div>
+
+            <div
+              class="stat-value win"
+              id="wins">
+              0
+            </div>
+
+          </div>
+
+
+          <div class="stat">
+
+            <div class="stat-label">
+              Losses
+            </div>
+
+            <div
+              class="stat-value loss"
+              id="losses">
+              0
+            </div>
+
           </div>
 
         </div>
@@ -842,21 +948,35 @@ input:focus{
             Daily Loss
           </div>
 
-          <div class="daily-loss-amount" id="dailyLossAmount">
+          <div
+            class="daily-loss-amount"
+            id="dailyLossAmount">
             $0.00 / $0.00
           </div>
 
         </div>
 
+
         <div class="loss-bar">
-          <div class="loss-bar-fill" id="lossBarFill"></div>
+
+          <div
+            class="loss-bar-fill"
+            id="lossBarFill">
+          </div>
+
         </div>
 
-        <div class="loss-status" id="lossStatus">
+
+        <div
+          class="loss-status"
+          id="lossStatus">
           Set a max daily loss to activate the limit.
         </div>
 
-        <div class="loss-warning" id="lossWarning">
+
+        <div
+          class="loss-warning"
+          id="lossWarning">
           ⚠️ Max daily loss reached — stop trading.
         </div>
 
@@ -871,36 +991,19 @@ input:focus{
           Trades for this month
         </div>
 
-        <div class="trade-month" id="tradeMonth"></div>
+        <div
+          class="trade-month"
+          id="tradeMonth">
+        </div>
 
-        <div class="trades-list" id="tradesList"></div>
+        <div
+          class="trades-list"
+          id="tradesList">
+        </div>
 
       </div>
 
     </div>
-
-  </div>
-
-
-  <!-- BOTTOM SETTINGS -->
-
-  <div class="settings-bottom">
-
-    <div class="settings-bottom-text">
-
-      <div class="settings-bottom-title">
-        Journal Settings
-      </div>
-
-      <div class="settings-bottom-subtitle">
-        Change your starting balance or max daily loss anytime.
-      </div>
-
-    </div>
-
-    <button class="bottom-edit-btn" id="bottomEditSettings">
-      Edit Settings
-    </button>
 
   </div>
 
@@ -909,7 +1012,9 @@ input:focus{
 
 <!-- TRADE MODAL -->
 
-<div class="modal" id="tradeModal">
+<div
+  class="modal"
+  id="tradeModal">
 
   <div class="modal-box">
 
@@ -917,7 +1022,11 @@ input:focus{
       Add Trade Result
     </div>
 
-    <div class="modal-date" id="modalDate"></div>
+    <div
+      class="modal-date"
+      id="modalDate">
+    </div>
+
 
     <div class="modal-input">
 
@@ -934,13 +1043,18 @@ input:focus{
 
     </div>
 
+
     <div class="modal-actions">
 
-      <button class="cancel-btn" id="cancelModal">
+      <button
+        class="cancel-btn"
+        id="cancelModal">
         Cancel
       </button>
 
-      <button class="save-trade-btn" id="saveTradeBtn">
+      <button
+        class="save-trade-btn"
+        id="saveTradeBtn">
         Save Trade
       </button>
 
@@ -983,9 +1097,13 @@ function localDate(d){
 
   const y = d.getFullYear();
 
-  const m = String(d.getMonth() + 1).padStart(2,"0");
+  const m = String(
+    d.getMonth() + 1
+  ).padStart(2,"0");
 
-  const day = String(d.getDate()).padStart(2,"0");
+  const day = String(
+    d.getDate()
+  ).padStart(2,"0");
 
   return `${y}-${m}-${day}`;
 }
@@ -1019,11 +1137,15 @@ function fmtPnl(n){
   n = Number(n) || 0;
 
   if(n > 0){
+
     return "+$" + money(n);
+
   }
 
   if(n < 0){
+
     return "-$" + money(Math.abs(n));
+
   }
 
   return "$0.00";
@@ -1233,6 +1355,7 @@ function renderDailyLoss(){
       "No loss recorded for this day.";
 
   }
+
   else if(loss < max){
 
     status.textContent =
@@ -1251,6 +1374,7 @@ function renderDailyLoss(){
     warning.classList.add("show");
 
   }
+
   else{
 
     warning.classList.remove("show");
@@ -1327,29 +1451,45 @@ function renderCalendar(){
         daysPrevMonth - start + i + 1;
 
       dateObj =
-        new Date(year,month-1,dayNumber);
+        new Date(
+          year,
+          month-1,
+          dayNumber
+        );
 
       cell.classList.add("other");
 
     }
-    else if(i >= start + daysInMonth){
+
+    else if(
+      i >= start + daysInMonth
+    ){
 
       dayNumber =
         i - start - daysInMonth + 1;
 
       dateObj =
-        new Date(year,month+1,dayNumber);
+        new Date(
+          year,
+          month+1,
+          dayNumber
+        );
 
       cell.classList.add("other");
 
     }
+
     else{
 
       dayNumber =
         i - start + 1;
 
       dateObj =
-        new Date(year,month,dayNumber);
+        new Date(
+          year,
+          month,
+          dayNumber
+        );
 
     }
 
@@ -1358,13 +1498,19 @@ function renderCalendar(){
       localDate(dateObj);
 
 
-    if(key === localDate(new Date())){
+    if(
+      key === localDate(new Date())
+    ){
+
       cell.classList.add("today");
+
     }
 
 
     if(key === selectedDate){
+
       cell.classList.add("selected");
+
     }
 
 
@@ -1376,7 +1522,6 @@ function renderCalendar(){
 
     number.textContent =
       dayNumber;
-
 
     cell.appendChild(number);
 
@@ -1425,7 +1570,6 @@ function renderCalendar(){
           1
         );
 
-
       openModal(key);
 
     };
@@ -1461,8 +1605,10 @@ function renderStats(){
   const pnl =
     document.getElementById("monthPnl");
 
+
   pnl.textContent =
     fmtPnl(stats.pnl);
+
 
   pnl.className =
     "stat-value " +
@@ -1555,6 +1701,7 @@ function renderTrades(){
     dateDiv.className =
       "trade-date";
 
+
     dateDiv.textContent =
       new Date(
         date + "T00:00:00"
@@ -1638,11 +1785,6 @@ function renderSettings(){
     Number(data.maxDailyLoss) > 0;
 
 
-  /*
-    Show the saved version only when
-    BOTH settings have been saved.
-  */
-
   if(hasBalance && hasDailyLoss){
 
     form.style.display = "none";
@@ -1660,6 +1802,7 @@ function renderSettings(){
         "$" + money(data.maxDailyLoss);
 
   }
+
   else{
 
     form.style.display = "block";
@@ -1752,7 +1895,8 @@ function openModal(key){
 
   setTimeout(
     () =>
-      document.getElementById("pnlInput")
+      document
+        .getElementById("pnlInput")
         .focus(),
     50
   );
@@ -1814,7 +1958,9 @@ function deleteTrade(date){
       "Delete this trade?"
     )
   ){
+
     return;
+
   }
 
 
@@ -1835,7 +1981,10 @@ document.getElementById("saveBalance")
   .onclick = () => {
 
     const input =
-      document.getElementById("startingBalance");
+      document.getElementById(
+        "startingBalance"
+      );
+
 
     const value =
       Number(input.value);
@@ -1875,7 +2024,10 @@ document.getElementById("saveDailyLoss")
   .onclick = () => {
 
     const input =
-      document.getElementById("maxDailyLoss");
+      document.getElementById(
+        "maxDailyLoss"
+      );
+
 
     const value =
       Number(input.value);
@@ -1914,39 +2066,46 @@ document.getElementById("saveDailyLoss")
 function editSettings(){
 
   const form =
-    document.getElementById("settingsForm");
+    document.getElementById(
+      "settingsForm"
+    );
+
 
   const saved =
-    document.getElementById("savedSettings");
+    document.getElementById(
+      "savedSettings"
+    );
 
 
-  form.style.display = "block";
-
-  saved.classList.remove("show");
-
-
-  document.getElementById("startingBalance")
-    .value =
-      data.startingBalance || "";
+  form.style.display =
+    "block";
 
 
-  document.getElementById("maxDailyLoss")
-    .value =
-      data.maxDailyLoss || "";
+  saved.classList.remove(
+    "show"
+  );
 
 
-  document.getElementById("startingBalance")
-    .focus();
+  document.getElementById(
+    "startingBalance"
+  ).value =
+    data.startingBalance || "";
+
+
+  document.getElementById(
+    "maxDailyLoss"
+  ).value =
+    data.maxDailyLoss || "";
+
+
+  document.getElementById(
+    "startingBalance"
+  ).focus();
 
 }
 
 
 document.getElementById("editSettings")
-  .onclick =
-    editSettings;
-
-
-document.getElementById("bottomEditSettings")
   .onclick =
     editSettings;
 
@@ -1985,8 +2144,10 @@ document.getElementById("todayBtn")
     const today =
       new Date();
 
+
     selectedDate =
       localDate(today);
+
 
     view =
       new Date(
@@ -1994,6 +2155,7 @@ document.getElementById("todayBtn")
         today.getMonth(),
         1
       );
+
 
     render();
 
@@ -2053,5 +2215,3 @@ render();
 
 </body>
 </html>
-
-This version keeps the main dashboard much cleaner: once both values are saved, the two input fields disappear and only the saved values are shown. The Edit Settings button at the bottom brings both inputs back whenever you need to change them.
