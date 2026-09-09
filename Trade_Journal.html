@@ -1568,4 +1568,938 @@ function renderDailyLoss(){
     data.maxDailyLoss || "";
 
 
-  con
+  const max =
+    Number(data.maxDailyLoss) || 0;
+
+
+  /*
+    If max daily loss has not been entered,
+    hide the progress bar.
+  */
+
+  if(max <= 0){
+
+    info.style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  info.style.display =
+    "block";
+
+
+  const loss =
+    getDailyLoss();
+
+
+  /*
+    Progress percentage.
+  */
+
+  let percentage =
+    (loss / max) * 100;
+
+
+  /*
+    Do not allow the bar to go beyond 100%.
+  */
+
+  percentage =
+    Math.min(
+      Math.max(percentage,0),
+      100
+    );
+
+
+  document.getElementById(
+    "lossBarFill"
+  ).style.width =
+    percentage + "%";
+
+
+  document.getElementById(
+    "dailyLossValue"
+  ).textContent =
+    "$" +
+    money(loss) +
+    " / $" +
+    money(max);
+
+
+  const warning =
+    document.getElementById(
+      "lossWarning"
+    );
+
+
+  /*
+    Show warning once the loss reaches
+    or exceeds the maximum.
+  */
+
+  if(loss >= max){
+
+    warning.classList.add("show");
+
+  }
+
+  else{
+
+    warning.classList.remove("show");
+
+  }
+
+}
+
+
+/* =========================
+   RENDER
+========================= */
+
+function render(){
+
+  document.getElementById(
+    "monthTitle"
+  ).textContent =
+    monthName(view);
+
+
+  document.getElementById(
+    "tradeMonth"
+  ).textContent =
+    monthName(view);
+
+
+  document.getElementById(
+    "startingBalance"
+  ).value =
+    data.startingBalance || "";
+
+
+  document.getElementById(
+    "maxDailyLoss"
+  ).value =
+    data.maxDailyLoss || "";
+
+
+  renderCalendar();
+
+  renderStats();
+
+  renderTrades();
+
+  renderDailyLoss();
+
+}
+
+
+/* =========================
+   CALENDAR
+========================= */
+
+function renderCalendar(){
+
+  const cal =
+    document.getElementById(
+      "calendar"
+    );
+
+
+  cal.innerHTML = "";
+
+
+  const y =
+    view.getFullYear();
+
+
+  const m =
+    view.getMonth();
+
+
+  const first =
+    new Date(y,m,1);
+
+
+  const days =
+    new Date(y,m+1,0).getDate();
+
+
+  const prevDays =
+    new Date(y,m,0).getDate();
+
+
+  const total =
+    Math.ceil(
+      (first.getDay()+days)/7
+    ) * 7;
+
+
+  const today =
+    localDate(new Date());
+
+
+  for(let i=0;i<total;i++){
+
+    let n =
+      i - first.getDay() + 1;
+
+
+    let d;
+
+    let other = false;
+
+
+    if(n < 1){
+
+      n =
+        prevDays + n;
+
+
+      d =
+        new Date(
+          y,
+          m-1,
+          n
+        );
+
+
+      other = true;
+
+    }
+
+
+    else if(n > days){
+
+      n =
+        n - days;
+
+
+      d =
+        new Date(
+          y,
+          m+1,
+          n
+        );
+
+
+      other = true;
+
+    }
+
+
+    else{
+
+      d =
+        new Date(
+          y,
+          m,
+          n
+        );
+
+    }
+
+
+    const key =
+      localDate(d);
+
+
+    const trade =
+      data.trades[key];
+
+
+    const el =
+      document.createElement("div");
+
+
+    el.className =
+      "day" +
+
+      (other
+        ? " other"
+        : "") +
+
+      (key === today
+        ? " today"
+        : "") +
+
+      (key === selectedDate
+        ? " selected"
+        : "");
+
+
+    el.innerHTML = `
+
+      <div class="num">
+        ${n}
+      </div>
+
+      ${
+        trade
+
+        ?
+
+        `<div class="pnl ${
+          Number(trade.pnl) >= 0
+          ? "win"
+          : "loss"
+        }">
+
+          ${fmtPnl(Number(trade.pnl))}
+
+        </div>`
+
+        :
+
+        ""
+      }
+
+    `;
+
+
+    if(trade){
+
+      el.title =
+        Number(trade.pnl) >= 0
+        ? "Win"
+        : "Loss";
+
+    }
+
+
+    el.onclick = () => {
+
+      selectedDate =
+        key;
+
+
+      if(!other){
+
+        openModal(key);
+
+      }
+
+      else{
+
+        view =
+          new Date(d);
+
+
+        view.setDate(1);
+
+
+        openModal(key);
+
+      }
+
+    };
+
+
+    cal.appendChild(el);
+
+  }
+
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+function renderStats(){
+
+  const s =
+    monthStats();
+
+
+  document.getElementById(
+    "monthStart"
+  ).textContent =
+    "$" + money(s.start);
+
+
+  document.getElementById(
+    "monthEnd"
+  ).textContent =
+    "$" + money(s.end);
+
+
+  const pnl =
+    document.getElementById(
+      "totalPnl"
+    );
+
+
+  pnl.textContent =
+    fmtPnl(s.pnl);
+
+
+  pnl.className =
+    "num-font " +
+
+    (
+      s.pnl >= 0
+      ? "win"
+      : "loss"
+    );
+
+
+  document.getElementById(
+    "winRate"
+  ).textContent =
+
+    (
+
+      s.wins + s.losses
+
+      ?
+
+      (
+        s.wins /
+        (s.wins+s.losses) *
+        100
+      ).toFixed(2)
+
+      :
+
+      "0.00"
+
+    ) + "%";
+
+
+  document.getElementById(
+    "wins"
+  ).textContent =
+    s.wins;
+
+
+  document.getElementById(
+    "losses"
+  ).textContent =
+    s.losses;
+
+}
+
+
+/* =========================
+   TRADE LIST
+========================= */
+
+function renderTrades(){
+
+  const box =
+    document.getElementById(
+      "tradeList"
+    );
+
+
+  const entries =
+    monthStats()
+      .entries
+      .sort(
+        (a,b) =>
+          b[0].localeCompare(a[0])
+      );
+
+
+  if(!entries.length){
+
+    box.innerHTML =
+      '<div class="empty">No trades logged this month.</div>';
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+    entries.map(
+      ([date,t]) => {
+
+        const d =
+          new Date(
+            date +
+            "T00:00:00"
+          );
+
+
+        return `
+
+          <div class="trade">
+
+            <div>
+
+              ${
+                d.toLocaleDateString(
+                  undefined,
+                  {
+                    month:"short",
+                    day:"2-digit",
+                    year:"numeric"
+                  }
+                )
+              }
+
+            </div>
+
+
+            <div
+              class="num-font ${
+                Number(t.pnl) >= 0
+                ? "win"
+                : "loss"
+              }"
+            >
+
+              ${fmtPnl(Number(t.pnl))}
+
+            </div>
+
+
+            <div
+              class="${
+                Number(t.pnl) >= 0
+                ? "win"
+                : "loss"
+              }"
+            >
+
+              ${
+                Number(t.pnl) >= 0
+                ? "Win"
+                : "Loss"
+              }
+
+            </div>
+
+
+            <button
+              class="delete"
+              onclick="deleteTrade('${date}')"
+            >
+              ×
+            </button>
+
+          </div>
+
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+function openModal(key){
+
+  selectedDate =
+    key;
+
+
+  document.getElementById(
+    "modalTitle"
+  ).textContent =
+
+    "Log Trade — " +
+
+    new Date(
+      key +
+      "T00:00:00"
+    ).toLocaleDateString(
+      undefined,
+      {
+        month:"long",
+        day:"numeric",
+        year:"numeric"
+      }
+    );
+
+
+  const input =
+    document.getElementById(
+      "modalInput"
+    );
+
+
+  /*
+    If the date already has a trade,
+    show its existing P&L.
+  */
+
+  input.value =
+    data.trades[key]
+    ? data.trades[key].pnl
+    : "";
+
+
+  document.getElementById(
+    "modal"
+  ).style.display =
+    "flex";
+
+
+  setTimeout(
+    () => input.focus(),
+    50
+  );
+
+}
+
+
+/* =========================
+   CLOSE MODAL
+========================= */
+
+function closeModal(){
+
+  document.getElementById(
+    "modal"
+  ).style.display =
+    "none";
+
+}
+
+
+/* =========================
+   SAVE TRADE
+========================= */
+
+function saveTrade(){
+
+  const input =
+    document.getElementById(
+      "modalInput"
+    );
+
+
+  const value =
+    Number(input.value);
+
+
+  if(input.value === "" || !Number.isFinite(value)){
+
+    alert(
+      "Please enter a valid P&L."
+    );
+
+    return;
+
+  }
+
+
+  data.trades[selectedDate] = {
+
+    pnl:value
+
+  };
+
+
+  save();
+
+
+  closeModal();
+
+
+  render();
+
+}
+
+
+/* =========================
+   DELETE TRADE
+========================= */
+
+function deleteTrade(date){
+
+  if(
+    !confirm(
+      "Delete this trade?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  delete data.trades[date];
+
+
+  save();
+
+
+  render();
+
+}
+
+
+/* =========================
+   STARTING BALANCE
+========================= */
+
+document.getElementById(
+  "saveBalance"
+).onclick = () => {
+
+  const input =
+    document.getElementById(
+      "startingBalance"
+    );
+
+
+  const value =
+    Number(input.value);
+
+
+  if(
+    input.value === "" ||
+    !Number.isFinite(value) ||
+    value < 0
+  ){
+
+    alert(
+      "Please enter a valid starting balance."
+    );
+
+    return;
+
+  }
+
+
+  data.startingBalance =
+    value;
+
+
+  save();
+
+
+  render();
+
+};
+
+
+/* =========================
+   MAX DAILY LOSS
+========================= */
+
+document.getElementById(
+  "saveDailyLoss"
+).onclick = () => {
+
+  const input =
+    document.getElementById(
+      "maxDailyLoss"
+    );
+
+
+  const value =
+    Number(input.value);
+
+
+  if(
+    input.value === "" ||
+    !Number.isFinite(value) ||
+    value <= 0
+  ){
+
+    alert(
+      "Please enter a valid max daily loss."
+    );
+
+    return;
+
+  }
+
+
+  data.maxDailyLoss =
+    value;
+
+
+  save();
+
+
+  render();
+
+};
+
+
+/* =========================
+   MODAL BUTTONS
+========================= */
+
+document.getElementById(
+  "cancel"
+).onclick =
+  closeModal;
+
+
+document.getElementById(
+  "modalSave"
+).onclick =
+  saveTrade;
+
+
+/*
+  Allow Enter key to save trade.
+*/
+
+document.getElementById(
+  "modalInput"
+).addEventListener(
+  "keydown",
+  e => {
+
+    if(e.key === "Enter"){
+
+      saveTrade();
+
+    }
+
+    if(e.key === "Escape"){
+
+      closeModal();
+
+    }
+
+  }
+);
+
+
+/*
+  Close modal when clicking
+  outside the modal.
+*/
+
+document.getElementById(
+  "modal"
+).addEventListener(
+  "click",
+  e => {
+
+    if(
+      e.target.id === "modal"
+    ){
+
+      closeModal();
+
+    }
+
+  }
+);
+
+
+/* =========================
+   MONTH NAVIGATION
+========================= */
+
+document.getElementById(
+  "prev"
+).onclick = () => {
+
+  view.setMonth(
+    view.getMonth() - 1
+  );
+
+  render();
+
+};
+
+
+document.getElementById(
+  "next"
+).onclick = () => {
+
+  view.setMonth(
+    view.getMonth() + 1
+  );
+
+  render();
+
+};
+
+
+document.getElementById(
+  "today"
+).onclick = () => {
+
+  const now =
+    new Date();
+
+
+  view =
+    new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      1
+    );
+
+
+  selectedDate =
+    localDate(now);
+
+
+  render();
+
+};
+
+
+/* =========================
+   RESET
+========================= */
+
+document.getElementById(
+  "reset"
+).onclick = () => {
+
+  const confirmed =
+    confirm(
+      "Are you sure you want to permanently delete your entire trading journal?"
+    );
+
+
+  if(!confirmed){
+
+    return;
+
+  }
+
+
+  data = {
+
+    startingBalance:0,
+
+    maxDailyLoss:0,
+
+    trades:{}
+
+  };
+
+
+  selectedDate =
+    localDate(new Date());
+
+
+  save();
+
+
+  render();
+
+};
+
+
+/* =========================
+   INITIAL RENDER
+========================= */
+
+render();
+
+</script>
+
+</body>
+</html>
