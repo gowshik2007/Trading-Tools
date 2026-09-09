@@ -17,6 +17,7 @@
   --panel-hi:#161a21;
   --border:#242a33;
   --border-soft:#1c212a;
+
   --text:#f2f3f4;
   --muted:#8b929c;
   --faint:#565d67;
@@ -25,8 +26,6 @@
   --gold-hi:#ecc772;
 
   --green:#3ecf8e;
-  --green-soft:rgba(62,207,142,.12);
-
   --red:#f0605e;
   --red-soft:rgba(240,96,94,.12);
 
@@ -177,6 +176,7 @@ button{
 
 .card{
   background:var(--panel);
+
   border:1px solid var(--border);
 
   border-radius:var(--radius-lg);
@@ -201,7 +201,9 @@ button{
 
 .week{
   display:grid;
-  grid-template-columns:repeat(7,1fr);
+
+  grid-template-columns:
+    repeat(7,1fr);
 
   color:var(--faint);
 
@@ -215,7 +217,10 @@ button{
 
 .calendar{
   display:grid;
-  grid-template-columns:repeat(7,1fr);
+
+  grid-template-columns:
+    repeat(7,1fr);
+
   gap:6px;
 }
 
@@ -243,6 +248,7 @@ button{
 .day:hover{
   background:var(--panel-hi);
   border-color:#2c333e;
+
   transform:translateY(-1px);
 }
 
@@ -256,6 +262,7 @@ button{
 
 .day.other:hover{
   transform:none;
+
   background:#0d1015;
 }
 
@@ -268,11 +275,13 @@ button{
 
 .day.selected{
   background:#1a1710;
+
   border-color:#5a4620;
 }
 
 .num{
   font-size:13px;
+
   color:#c7cbd0;
 }
 
@@ -308,7 +317,7 @@ button{
 
 
 /* =========================
-   BALANCE CARD
+   STARTING BALANCE
 ========================= */
 
 .balance-card{
@@ -349,6 +358,7 @@ input:focus{
 
 .balance-row{
   display:flex;
+
   gap:8px;
 }
 
@@ -381,110 +391,31 @@ input:focus{
 
 
 /* =========================
-   MAX DAILY LOSS
+   MAX DAILY LOSS INPUT
 ========================= */
 
-.daily-loss-section{
+.daily-loss-input{
   margin-top:18px;
+
   padding-top:18px;
 
-  border-top:1px solid var(--border-soft);
+  border-top:
+    1px solid var(--border-soft);
 }
 
-.daily-loss-row{
+.daily-loss-input-row{
   display:flex;
+
   gap:8px;
 }
 
-.daily-loss-row input{
+.daily-loss-input-row input{
   flex:1;
-}
-
-.daily-loss-info{
-  margin-top:16px;
-}
-
-.daily-loss-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-
-  margin-bottom:8px;
-
-  font-size:12px;
-}
-
-.daily-loss-title{
-  color:var(--muted);
-  font-weight:600;
-}
-
-.daily-loss-value{
-  color:#d7dade;
-  font-family:'IBM Plex Mono',monospace;
-  font-size:12px;
-}
-
-.loss-bar{
-  width:100%;
-  height:9px;
-
-  background:#0b0e12;
-
-  border:1px solid var(--border-soft);
-
-  border-radius:999px;
-
-  overflow:hidden;
-}
-
-.loss-bar-fill{
-  width:0%;
-
-  height:100%;
-
-  border-radius:999px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #d4a44c,
-      #f0605e
-    );
-
-  transition:
-    width .25s ease;
-}
-
-.loss-warning{
-  display:none;
-
-  margin-top:10px;
-
-  padding:10px 12px;
-
-  border-radius:var(--radius-sm);
-
-  background:var(--red-soft);
-
-  border:1px solid #5c2a2a;
-
-  color:#f0938f;
-
-  font-size:12px;
-
-  font-weight:700;
-
-  line-height:1.4;
-}
-
-.loss-warning.show{
-  display:block;
 }
 
 
 /* =========================
-   STATS
+   MONTHLY PERFORMANCE
 ========================= */
 
 .stats{
@@ -504,7 +435,8 @@ input:focus{
 .balance-grid{
   display:grid;
 
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:
+    1fr 1fr;
 
   gap:10px;
 
@@ -535,6 +467,7 @@ input:focus{
 
 .stat strong{
   font-size:19px;
+
   font-weight:700;
 }
 
@@ -553,6 +486,110 @@ input:focus{
 
 .metrics .stat strong{
   font-size:16.5px;
+}
+
+
+/* =========================
+   DAILY LOSS BAR CARD
+========================= */
+
+.daily-loss-card{
+  padding:18px;
+}
+
+.daily-loss-header{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  margin-bottom:12px;
+}
+
+.daily-loss-header .section-title{
+  margin:0;
+}
+
+.daily-loss-amount{
+  color:#d7dade;
+
+  font-size:12px;
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+}
+
+.loss-bar{
+  width:100%;
+
+  height:10px;
+
+  background:#0b0e12;
+
+  border:
+    1px solid var(--border-soft);
+
+  border-radius:999px;
+
+  overflow:hidden;
+}
+
+.loss-bar-fill{
+  width:0%;
+
+  height:100%;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--gold),
+      var(--red)
+    );
+
+  transition:
+    width .3s ease;
+}
+
+.loss-status{
+  margin-top:10px;
+
+  font-size:12px;
+
+  color:var(--muted);
+
+  line-height:1.4;
+}
+
+.loss-warning{
+  display:none;
+
+  margin-top:10px;
+
+  padding:10px 12px;
+
+  border-radius:var(--radius-sm);
+
+  background:var(--red-soft);
+
+  border:1px solid #5c2a2a;
+
+  color:#f0938f;
+
+  font-size:12px;
+
+  font-weight:700;
+
+  line-height:1.4;
+}
+
+.loss-warning.show{
+  display:block;
 }
 
 
@@ -581,7 +618,8 @@ input:focus{
 
   align-items:center;
 
-  border-top:1px solid var(--border-soft);
+  border-top:
+    1px solid var(--border-soft);
 
   padding:11px 2px;
 
@@ -649,6 +687,7 @@ input:focus{
 
 .reset-card strong{
   font-size:13.5px;
+
   font-weight:600;
 }
 
@@ -812,22 +851,27 @@ input:focus{
 
   .month-nav{
     width:100%;
+
     justify-content:center;
   }
 
   .month-title{
     font-size:19px;
+
     min-width:150px;
   }
 
   .day{
     min-height:66px;
+
     padding:8px;
   }
 
   .pnl{
     left:8px;
+
     bottom:7px;
+
     font-size:11px;
   }
 
@@ -854,401 +898,417 @@ input:focus{
 <main class="main">
 
 
-  <!-- =========================
-       HEADER
-  ========================== -->
+<!-- =========================
+     HEADER
+========================== -->
 
-  <div class="topbar">
+<div class="topbar">
 
-    <div class="brand">
+  <div class="brand">
 
-      <img
-        src="logo.png"
-        alt="Trade Journal Logo"
-        class="brand-logo"
-      >
+    <img
+      src="logo.png"
+      alt="Trade Journal Logo"
+      class="brand-logo"
+    >
 
-      <span>Trade Journal</span>
-
-    </div>
-
-
-    <div class="month-nav">
-
-      <button
-        class="icon-btn"
-        id="prev"
-      >
-        ‹
-      </button>
-
-
-      <div
-        class="month-title"
-        id="monthTitle"
-      ></div>
-
-
-      <button
-        class="icon-btn"
-        id="next"
-      >
-        ›
-      </button>
-
-
-      <button
-        class="today-btn"
-        id="today"
-      >
-        Today
-      </button>
-
-    </div>
+    <span>
+      Trade Journal
+    </span>
 
   </div>
 
 
-
-  <!-- =========================
-       DASHBOARD
-  ========================== -->
-
-  <div class="dashboard">
-
-
-    <!-- =========================
-         CALENDAR
-    ========================== -->
-
-    <section>
-
-      <div class="card calendar-card">
-
-        <div class="week">
-
-          <div>Sun</div>
-          <div>Mon</div>
-          <div>Tue</div>
-          <div>Wed</div>
-          <div>Thu</div>
-          <div>Fri</div>
-          <div>Sat</div>
-
-        </div>
-
-
-        <div
-          class="calendar"
-          id="calendar"
-        ></div>
-
-
-        <div class="hint">
-          Click any date to log or update your trade.
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         RIGHT SIDE
-    ========================== -->
-
-    <section class="side">
-
-
-      <!-- STARTING BALANCE + DAILY LOSS -->
-
-      <div class="card balance-card">
-
-
-        <div class="label">
-          ACCOUNT STARTING BALANCE
-        </div>
-
-
-        <div class="balance-row">
-
-          <input
-            id="startingBalance"
-            type="number"
-            min="0"
-            step="0.01"
-            placeholder="10000"
-          >
-
-
-          <button
-            class="gold-btn"
-            id="saveBalance"
-          >
-            Save
-          </button>
-
-        </div>
-
-
-
-        <!-- MAX DAILY LOSS -->
-
-        <div class="daily-loss-section">
-
-          <div class="label">
-            MAX DAILY LOSS
-          </div>
-
-
-          <div class="daily-loss-row">
-
-            <input
-              id="maxDailyLoss"
-              type="number"
-              min="0"
-              step="0.01"
-              placeholder="100"
-            >
-
-
-            <button
-              class="gold-btn"
-              id="saveDailyLoss"
-            >
-              Save
-            </button>
-
-          </div>
-
-
-          <div
-            class="daily-loss-info"
-            id="dailyLossInfo"
-            style="display:none;"
-          >
-
-            <div class="daily-loss-top">
-
-              <span class="daily-loss-title">
-                Daily Loss
-              </span>
-
-              <span
-                class="daily-loss-value"
-                id="dailyLossValue"
-              >
-                $0.00 / $0.00
-              </span>
-
-            </div>
-
-
-            <div class="loss-bar">
-
-              <div
-                class="loss-bar-fill"
-                id="lossBarFill"
-              ></div>
-
-            </div>
-
-
-            <div
-              class="loss-warning"
-              id="lossWarning"
-            >
-              ⚠️ Max daily loss reached — stop trading.
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-
-      <!-- =========================
-           MONTHLY PERFORMANCE
-      ========================== -->
-
-      <div class="card stats">
-
-        <div class="section-title">
-          Monthly Performance
-        </div>
-
-
-        <div class="balance-grid">
-
-          <div class="stat">
-
-            <small>
-              MONTH START
-            </small>
-
-            <strong
-              class="num-font"
-              id="monthStart"
-            >
-              —
-            </strong>
-
-          </div>
-
-
-          <div class="stat">
-
-            <small>
-              MONTH END
-            </small>
-
-            <strong
-              class="num-font"
-              id="monthEnd"
-            >
-              —
-            </strong>
-
-          </div>
-
-        </div>
-
-
-
-        <div class="metrics">
-
-          <div class="stat">
-
-            <small>
-              TOTAL P&L
-            </small>
-
-            <strong
-              class="num-font"
-              id="totalPnl"
-            >
-              —
-            </strong>
-
-          </div>
-
-
-          <div class="stat">
-
-            <small>
-              WIN RATE
-            </small>
-
-            <strong
-              class="num-font"
-              id="winRate"
-            >
-              —
-            </strong>
-
-          </div>
-
-
-          <div class="stat">
-
-            <small>
-              WINS
-            </small>
-
-            <strong
-              class="num-font"
-              id="wins"
-            >
-              0
-            </strong>
-
-          </div>
-
-
-          <div class="stat">
-
-            <small>
-              LOSSES
-            </small>
-
-            <strong
-              class="num-font"
-              id="losses"
-            >
-              0
-            </strong>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-
-      <!-- =========================
-           TRADES
-      ========================== -->
-
-      <div class="card trades-card">
-
-        <div class="section-title">
-
-          Trades for
-          <span id="tradeMonth"></span>
-
-        </div>
-
-
-        <div id="tradeList"></div>
-
-      </div>
-
-    </section>
-
-  </div>
-
-
-
-  <!-- =========================
-       RESET
-  ========================== -->
-
-  <div class="reset-card">
-
-    <div>
-
-      <strong>
-        Reset all data
-      </strong>
-
-      <p>
-        Permanently clears the starting balance,
-        max daily loss and every trade stored
-        in this browser.
-      </p>
-
-    </div>
+  <div class="month-nav">
+
+    <button
+      class="icon-btn"
+      id="prev"
+    >
+      ‹
+    </button>
+
+
+    <div
+      class="month-title"
+      id="monthTitle"
+    ></div>
 
 
     <button
-      class="reset-btn"
-      id="reset"
+      class="icon-btn"
+      id="next"
     >
-      Reset Journal
+      ›
+    </button>
+
+
+    <button
+      class="today-btn"
+      id="today"
+    >
+      Today
     </button>
 
   </div>
+
+</div>
+
+
+
+<!-- =========================
+     DASHBOARD
+========================== -->
+
+<div class="dashboard">
+
+
+<!-- =========================
+     CALENDAR
+========================== -->
+
+<section>
+
+  <div class="card calendar-card">
+
+    <div class="week">
+
+      <div>Sun</div>
+      <div>Mon</div>
+      <div>Tue</div>
+      <div>Wed</div>
+      <div>Thu</div>
+      <div>Fri</div>
+      <div>Sat</div>
+
+    </div>
+
+
+    <div
+      class="calendar"
+      id="calendar"
+    ></div>
+
+
+    <div class="hint">
+      Click any date to log or update your trade.
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     RIGHT SIDE
+========================== -->
+
+<section class="side">
+
+
+<!-- STARTING BALANCE + MAX DAILY LOSS INPUT -->
+
+<div class="card balance-card">
+
+
+  <div class="label">
+    ACCOUNT STARTING BALANCE
+  </div>
+
+
+  <div class="balance-row">
+
+    <input
+      id="startingBalance"
+      type="number"
+      min="0"
+      step="0.01"
+      placeholder="10000"
+    >
+
+
+    <button
+      class="gold-btn"
+      id="saveBalance"
+    >
+      Save
+    </button>
+
+  </div>
+
+
+
+  <!-- MAX DAILY LOSS INPUT -->
+
+  <div class="daily-loss-input">
+
+    <div class="label">
+      MAX DAILY LOSS
+    </div>
+
+
+    <div class="daily-loss-input-row">
+
+      <input
+        id="maxDailyLoss"
+        type="number"
+        min="0"
+        step="0.01"
+        placeholder="100"
+      >
+
+
+      <button
+        class="gold-btn"
+        id="saveDailyLoss"
+      >
+        Save
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =========================
+     MONTHLY PERFORMANCE
+========================== -->
+
+<div class="card stats">
+
+  <div class="section-title">
+    Monthly Performance
+  </div>
+
+
+  <div class="balance-grid">
+
+    <div class="stat">
+
+      <small>
+        MONTH START
+      </small>
+
+      <strong
+        class="num-font"
+        id="monthStart"
+      >
+        —
+      </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+      <small>
+        MONTH END
+      </small>
+
+      <strong
+        class="num-font"
+        id="monthEnd"
+      >
+        —
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <div class="metrics">
+
+    <div class="stat">
+
+      <small>
+        TOTAL P&L
+      </small>
+
+      <strong
+        class="num-font"
+        id="totalPnl"
+      >
+        —
+      </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+      <small>
+        WIN RATE
+      </small>
+
+      <strong
+        class="num-font"
+        id="winRate"
+      >
+        —
+      </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+      <small>
+        WINS
+      </small>
+
+      <strong
+        class="num-font"
+        id="wins"
+      >
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+      <small>
+        LOSSES
+      </small>
+
+      <strong
+        class="num-font"
+        id="losses"
+      >
+        0
+      </strong>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =========================
+     DAILY LOSS BAR
+========================== -->
+
+<div
+  class="card daily-loss-card"
+  id="dailyLossCard"
+>
+
+
+  <div class="daily-loss-header">
+
+    <div class="section-title">
+      Daily Loss
+    </div>
+
+
+    <div
+      class="daily-loss-amount"
+      id="dailyLossAmount"
+    >
+      $0.00 / $0.00
+    </div>
+
+  </div>
+
+
+  <div class="loss-bar">
+
+    <div
+      class="loss-bar-fill"
+      id="lossBarFill"
+    ></div>
+
+  </div>
+
+
+  <div
+    class="loss-status"
+    id="lossStatus"
+  >
+    No loss recorded for this day.
+  </div>
+
+
+  <div
+    class="loss-warning"
+    id="lossWarning"
+  >
+    ⚠️ Max daily loss reached — stop trading.
+  </div>
+
+</div>
+
+
+
+<!-- =========================
+     TRADES
+========================== -->
+
+<div class="card trades-card">
+
+  <div class="section-title">
+
+    Trades for
+    <span id="tradeMonth"></span>
+
+  </div>
+
+
+  <div id="tradeList"></div>
+
+</div>
+
+
+</section>
+
+</div>
+
+
+
+<!-- =========================
+     RESET
+========================== -->
+
+<div class="reset-card">
+
+  <div>
+
+    <strong>
+      Reset all data
+    </strong>
+
+    <p>
+      Permanently clears the starting balance,
+      max daily loss and every trade stored
+      in this browser.
+    </p>
+
+  </div>
+
+
+  <button
+    class="reset-btn"
+    id="reset"
+  >
+    Reset Journal
+  </button>
+
+</div>
 
 </main>
 
 
 
 <!-- =========================
-     LOG TRADE MODAL
+     MODAL
 ========================== -->
 
 <div
@@ -1310,16 +1370,20 @@ input:focus{
    DATA
 ========================= */
 
-const KEY = "tradeJournal_v1";
+const KEY =
+  "tradeJournal_v1";
 
-let data = JSON.parse(
-  localStorage.getItem(KEY) ||
-  '{"startingBalance":0,"maxDailyLoss":0,"trades":{}}'
-);
+
+let data =
+  JSON.parse(
+    localStorage.getItem(KEY) ||
+    '{"startingBalance":0,"maxDailyLoss":0,"trades":{}}'
+  );
 
 
 /*
-  Compatibility with older saved data.
+  Make sure older saved data
+  continues working.
 */
 
 if(!data.trades){
@@ -1331,7 +1395,8 @@ if(data.maxDailyLoss === undefined){
 }
 
 
-let view = new Date();
+let view =
+  new Date();
 
 view.setDate(1);
 
@@ -1382,8 +1447,11 @@ function money(n){
 function fmtPnl(n){
 
   return (
-    n >= 0 ? "+" : "-"
-  ) + "$" + money(Math.abs(n));
+    n >= 0
+      ? "+"
+      : "-"
+  ) + "$" +
+    money(Math.abs(n));
 
 }
 
@@ -1433,12 +1501,14 @@ function balanceBefore(key){
 
 
   for(
-    const [date,t] of sortedTrades()
+    const [date,t]
+    of sortedTrades()
   ){
 
     if(date < key){
 
-      bal += Number(t.pnl);
+      bal +=
+        Number(t.pnl);
 
     }
 
@@ -1469,7 +1539,9 @@ function monthStats(){
 
 
   const start =
-    balanceBefore(`${key}-01`);
+    balanceBefore(
+      `${key}-01`
+    );
 
 
   const pnl =
@@ -1512,27 +1584,14 @@ function monthStats(){
 
 function getDailyLoss(){
 
-  /*
-    Loss is calculated only from the
-    currently selected date.
-
-    Example:
-
-    Max daily loss = $100
-
-    Trade P&L = -40
-
-    Daily loss = $40
-
-    Progress = 40%
-  */
-
   const trade =
     data.trades[selectedDate];
 
 
   if(!trade){
+
     return 0;
+
   }
 
 
@@ -1540,8 +1599,15 @@ function getDailyLoss(){
     Number(trade.pnl);
 
 
+  /*
+    Positive P&L = no daily loss.
+    Negative P&L = daily loss.
+  */
+
   if(pnl >= 0){
+
     return 0;
+
   }
 
 
@@ -1550,83 +1616,36 @@ function getDailyLoss(){
 }
 
 
+/* =========================
+   RENDER DAILY LOSS BAR
+========================= */
+
 function renderDailyLoss(){
-
-  const info =
-    document.getElementById(
-      "dailyLossInfo"
-    );
-
-
-  const input =
-    document.getElementById(
-      "maxDailyLoss"
-    );
-
-
-  input.value =
-    data.maxDailyLoss || "";
-
 
   const max =
     Number(data.maxDailyLoss) || 0;
-
-
-  /*
-    If max daily loss has not been entered,
-    hide the progress bar.
-  */
-
-  if(max <= 0){
-
-    info.style.display =
-      "none";
-
-    return;
-
-  }
-
-
-  info.style.display =
-    "block";
 
 
   const loss =
     getDailyLoss();
 
 
-  /*
-    Progress percentage.
-  */
-
-  let percentage =
-    (loss / max) * 100;
-
-
-  /*
-    Do not allow the bar to go beyond 100%.
-  */
-
-  percentage =
-    Math.min(
-      Math.max(percentage,0),
-      100
+  const fill =
+    document.getElementById(
+      "lossBarFill"
     );
 
 
-  document.getElementById(
-    "lossBarFill"
-  ).style.width =
-    percentage + "%";
+  const amount =
+    document.getElementById(
+      "dailyLossAmount"
+    );
 
 
-  document.getElementById(
-    "dailyLossValue"
-  ).textContent =
-    "$" +
-    money(loss) +
-    " / $" +
-    money(max);
+  const status =
+    document.getElementById(
+      "lossStatus"
+    );
 
 
   const warning =
@@ -1636,19 +1655,107 @@ function renderDailyLoss(){
 
 
   /*
-    Show warning once the loss reaches
-    or exceeds the maximum.
+    No max daily loss entered.
+  */
+
+  if(max <= 0){
+
+    fill.style.width =
+      "0%";
+
+
+    amount.textContent =
+      "$0.00 / $0.00";
+
+
+    status.textContent =
+      "Set a max daily loss to activate the limit.";
+
+
+    warning.classList.remove(
+      "show"
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Calculate percentage.
+  */
+
+  let percentage =
+    (loss / max) * 100;
+
+
+  percentage =
+    Math.min(
+      Math.max(
+        percentage,
+        0
+      ),
+      100
+    );
+
+
+  fill.style.width =
+    percentage + "%";
+
+
+  amount.textContent =
+    "$" +
+    money(loss) +
+    " / $" +
+    money(max);
+
+
+  /*
+    No loss.
+  */
+
+  if(loss === 0){
+
+    status.textContent =
+      "No loss recorded for this day.";
+
+  }
+
+
+  /*
+    Loss exists but limit
+    has not been reached.
+  */
+
+  else if(loss < max){
+
+    status.textContent =
+      money(max - loss) +
+      " remaining before max daily loss.";
+
+  }
+
+
+  /*
+    Max loss reached.
   */
 
   if(loss >= max){
 
-    warning.classList.add("show");
+    status.textContent =
+      "Daily loss limit has been reached.";
+
+    warning.classList.add(
+      "show"
+    );
 
   }
 
   else{
 
-    warning.classList.remove("show");
+    warning.classList.remove(
+      "show"
+    );
 
   }
 
@@ -1720,36 +1827,60 @@ function renderCalendar(){
 
 
   const first =
-    new Date(y,m,1);
+    new Date(
+      y,
+      m,
+      1
+    );
 
 
   const days =
-    new Date(y,m+1,0).getDate();
+    new Date(
+      y,
+      m + 1,
+      0
+    ).getDate();
 
 
   const prevDays =
-    new Date(y,m,0).getDate();
+    new Date(
+      y,
+      m,
+      0
+    ).getDate();
 
 
   const total =
     Math.ceil(
-      (first.getDay()+days)/7
+      (
+        first.getDay() +
+        days
+      ) / 7
     ) * 7;
 
 
   const today =
-    localDate(new Date());
+    localDate(
+      new Date()
+    );
 
 
-  for(let i=0;i<total;i++){
+  for(
+    let i=0;
+    i<total;
+    i++
+  ){
 
     let n =
-      i - first.getDay() + 1;
+      i -
+      first.getDay() +
+      1;
 
 
     let d;
 
-    let other = false;
+    let other =
+      false;
 
 
     if(n < 1){
@@ -1761,15 +1892,15 @@ function renderCalendar(){
       d =
         new Date(
           y,
-          m-1,
+          m - 1,
           n
         );
 
 
-      other = true;
+      other =
+        true;
 
     }
-
 
     else if(n > days){
 
@@ -1780,15 +1911,15 @@ function renderCalendar(){
       d =
         new Date(
           y,
-          m+1,
+          m + 1,
           n
         );
 
 
-      other = true;
+      other =
+        true;
 
     }
-
 
     else{
 
@@ -1811,23 +1942,31 @@ function renderCalendar(){
 
 
     const el =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
 
     el.className =
       "day" +
 
-      (other
+      (
+        other
         ? " other"
-        : "") +
+        : ""
+      ) +
 
-      (key === today
+      (
+        key === today
         ? " today"
-        : "") +
+        : ""
+      ) +
 
-      (key === selectedDate
+      (
+        key === selectedDate
         ? " selected"
-        : "");
+        : ""
+      );
 
 
     el.innerHTML = `
@@ -1843,11 +1982,13 @@ function renderCalendar(){
 
         `<div class="pnl ${
           Number(trade.pnl) >= 0
-          ? "win"
-          : "loss"
+            ? "win"
+            : "loss"
         }">
 
-          ${fmtPnl(Number(trade.pnl))}
+          ${fmtPnl(
+            Number(trade.pnl)
+          )}
 
         </div>`
 
@@ -1863,8 +2004,8 @@ function renderCalendar(){
 
       el.title =
         Number(trade.pnl) >= 0
-        ? "Win"
-        : "Loss";
+          ? "Win"
+          : "Loss";
 
     }
 
@@ -1905,7 +2046,7 @@ function renderCalendar(){
 
 
 /* =========================
-   STATS
+   MONTHLY STATS
 ========================= */
 
 function renderStats(){
@@ -1917,13 +2058,15 @@ function renderStats(){
   document.getElementById(
     "monthStart"
   ).textContent =
-    "$" + money(s.start);
+    "$" +
+    money(s.start);
 
 
   document.getElementById(
     "monthEnd"
   ).textContent =
-    "$" + money(s.end);
+    "$" +
+    money(s.end);
 
 
   const pnl =
@@ -1938,11 +2081,10 @@ function renderStats(){
 
   pnl.className =
     "num-font " +
-
     (
       s.pnl >= 0
-      ? "win"
-      : "loss"
+        ? "win"
+        : "loss"
     );
 
 
@@ -1952,13 +2094,17 @@ function renderStats(){
 
     (
 
-      s.wins + s.losses
+      s.wins +
+      s.losses
 
       ?
 
       (
         s.wins /
-        (s.wins+s.losses) *
+        (
+          s.wins +
+          s.losses
+        ) *
         100
       ).toFixed(2)
 
@@ -1984,7 +2130,7 @@ function renderStats(){
 
 
 /* =========================
-   TRADE LIST
+   TRADES
 ========================= */
 
 function renderTrades(){
@@ -2000,7 +2146,9 @@ function renderTrades(){
       .entries
       .sort(
         (a,b) =>
-          b[0].localeCompare(a[0])
+          b[0].localeCompare(
+            a[0]
+          )
       );
 
 
@@ -2048,12 +2196,14 @@ function renderTrades(){
             <div
               class="num-font ${
                 Number(t.pnl) >= 0
-                ? "win"
-                : "loss"
+                  ? "win"
+                  : "loss"
               }"
             >
 
-              ${fmtPnl(Number(t.pnl))}
+              ${fmtPnl(
+                Number(t.pnl)
+              )}
 
             </div>
 
@@ -2061,15 +2211,15 @@ function renderTrades(){
             <div
               class="${
                 Number(t.pnl) >= 0
-                ? "win"
-                : "loss"
+                  ? "win"
+                  : "loss"
               }"
             >
 
               ${
                 Number(t.pnl) >= 0
-                ? "Win"
-                : "Loss"
+                  ? "Win"
+                  : "Loss"
               }
 
             </div>
@@ -2093,7 +2243,7 @@ function renderTrades(){
 
 
 /* =========================
-   MODAL
+   OPEN MODAL
 ========================= */
 
 function openModal(key){
@@ -2127,15 +2277,10 @@ function openModal(key){
     );
 
 
-  /*
-    If the date already has a trade,
-    show its existing P&L.
-  */
-
   input.value =
     data.trades[key]
-    ? data.trades[key].pnl
-    : "";
+      ? data.trades[key].pnl
+      : "";
 
 
   document.getElementById(
@@ -2182,7 +2327,10 @@ function saveTrade(){
     Number(input.value);
 
 
-  if(input.value === "" || !Number.isFinite(value)){
+  if(
+    input.value === "" ||
+    !Number.isFinite(value)
+  ){
 
     alert(
       "Please enter a valid P&L."
@@ -2330,7 +2478,7 @@ document.getElementById(
 
 
 /* =========================
-   MODAL BUTTONS
+   MODAL CONTROLS
 ========================= */
 
 document.getElementById(
@@ -2344,10 +2492,6 @@ document.getElementById(
 ).onclick =
   saveTrade;
 
-
-/*
-  Allow Enter key to save trade.
-*/
 
 document.getElementById(
   "modalInput"
@@ -2370,11 +2514,6 @@ document.getElementById(
   }
 );
 
-
-/*
-  Close modal when clicking
-  outside the modal.
-*/
 
 document.getElementById(
   "modal"
@@ -2482,7 +2621,9 @@ document.getElementById(
 
 
   selectedDate =
-    localDate(new Date());
+    localDate(
+      new Date()
+    );
 
 
   save();
