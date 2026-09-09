@@ -26,6 +26,24 @@
   --shadow:0 18px 50px rgba(0,0,0,.28);
 }
 
+/* ========= LIGHT THEME ========= */
+html[data-theme="light"]{
+  --bg:#f4f5f7;
+  --panel:#ffffff;
+  --panel-hi:#f0f1f4;
+  --border:#dde0e6;
+  --border-soft:#e6e8ec;
+  --text:#14161a;
+  --muted:#6b717c;
+  --faint:#9aa0aa;
+  --gold:#b9873a;
+  --gold-hi:#a06f28;
+  --green:#1f9d63;
+  --red:#d8433f;
+  --red-soft:rgba(216,67,63,.10);
+  --shadow:0 12px 34px rgba(20,22,26,.08);
+}
+
 *{
   box-sizing:border-box;
 }
@@ -35,6 +53,7 @@ body{
   background:var(--bg);
   color:var(--text);
   font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  transition:background .2s ease,color .2s ease;
 }
 
 button,
@@ -89,6 +108,31 @@ button{
   margin-top:2px;
 }
 
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.theme-toggle{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:var(--panel-hi);
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  transition:.15s ease;
+}
+
+.theme-toggle:hover{
+  border-color:var(--gold);
+  color:var(--gold-hi);
+}
+
 
 /* =========================
    MAIN
@@ -105,6 +149,7 @@ button{
   border:1px solid var(--border);
   border-radius:var(--radius);
   box-shadow:var(--shadow);
+  transition:background .2s ease,border-color .2s ease;
 }
 
 
@@ -185,7 +230,7 @@ button{
   padding:9px;
   border:1px solid var(--border-soft);
   border-radius:12px;
-  background:#0e1116;
+  background:var(--panel-hi);
   cursor:pointer;
   transition:.15s ease;
 }
@@ -193,6 +238,10 @@ button{
 .day:hover{
   border-color:#3b414b;
   transform:translateY(-1px);
+}
+
+html[data-theme="light"] .day:hover{
+  border-color:#c4c9d1;
 }
 
 .day.other{
@@ -279,7 +328,7 @@ input{
   height:42px;
   border-radius:10px;
   border:1px solid var(--border);
-  background:#0d1015;
+  background:var(--bg);
   color:var(--text);
   padding:0 12px;
   outline:none;
@@ -371,7 +420,7 @@ input:focus{
 }
 
 .stat{
-  background:#0e1116;
+  background:var(--panel-hi);
   border:1px solid var(--border-soft);
   border-radius:12px;
   padding:13px;
@@ -414,7 +463,7 @@ input:focus{
   height:10px;
   margin-top:15px;
   border-radius:20px;
-  background:#0b0e13;
+  background:var(--bg);
   border:1px solid var(--border);
   overflow:hidden;
 }
@@ -527,6 +576,10 @@ input:focus{
   justify-content:center;
   padding:20px;
   z-index:10;
+}
+
+html[data-theme="light"] .modal{
+  background:rgba(20,22,26,.35);
 }
 
 .modal.show{
@@ -644,6 +697,17 @@ input:focus{
         </div>
 
       </div>
+
+    </div>
+
+    <div class="header-actions">
+
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        title="Toggle dark / light mode">
+        🌙
+      </button>
 
     </div>
 
@@ -1068,6 +1132,7 @@ input:focus{
 <script>
 
 const KEY = "tradeJournal_v1";
+const THEME_KEY = "tradeJournal_theme";
 
 let data = JSON.parse(
   localStorage.getItem(KEY) ||
@@ -1087,6 +1152,67 @@ let view = new Date();
 view.setDate(1);
 
 let selectedDate = localDate(new Date());
+
+
+/* =========================
+   THEME
+========================= */
+
+function applyTheme(theme){
+
+  document.documentElement
+    .setAttribute("data-theme", theme);
+
+  const btn =
+    document.getElementById("themeToggle");
+
+  btn.textContent =
+    theme === "light" ? "☀️" : "🌙";
+
+  localStorage.setItem(THEME_KEY, theme);
+
+}
+
+
+function initTheme(){
+
+  let theme =
+    localStorage.getItem(THEME_KEY);
+
+  if(!theme){
+
+    theme =
+      window.matchMedia &&
+      window.matchMedia(
+        "(prefers-color-scheme: light)"
+      ).matches
+        ? "light"
+        : "dark";
+
+  }
+
+  applyTheme(theme);
+
+}
+
+
+document.getElementById("themeToggle")
+  .onclick = () => {
+
+    const current =
+      document.documentElement
+        .getAttribute("data-theme");
+
+    applyTheme(
+      current === "light"
+        ? "dark"
+        : "light"
+    );
+
+  };
+
+
+initTheme();
 
 
 /* =========================
