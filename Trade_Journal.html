@@ -5,35 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trade Journal</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
-
 <style>
-
 :root{
   --bg:#0a0c10;
   --panel:#12151b;
   --panel-hi:#161a21;
   --border:#242a33;
   --border-soft:#1c212a;
-
   --text:#f2f3f4;
   --muted:#8b929c;
   --faint:#565d67;
-
   --gold:#d4a44c;
   --gold-hi:#ecc772;
-
   --green:#3ecf8e;
   --red:#f0605e;
   --red-soft:rgba(240,96,94,.12);
-
-  --radius-lg:18px;
-  --radius-md:12px;
-  --radius-sm:8px;
-
-  --shadow:0 24px 48px -20px rgba(0,0,0,.55);
+  --radius:18px;
+  --radius-sm:12px;
+  --shadow:0 18px 50px rgba(0,0,0,.28);
 }
 
 *{
@@ -42,26 +31,9 @@
 
 body{
   margin:0;
-
-  background:
-    radial-gradient(
-      1100px 600px at 85% -10%,
-      rgba(212,164,76,.07),
-      transparent 60%
-    ),
-    var(--bg);
-
+  background:var(--bg);
   color:var(--text);
-
-  font-family:
-    'Inter',
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    sans-serif;
-
-  -webkit-font-smoothing:antialiased;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
 button,
@@ -73,229 +45,166 @@ button{
   cursor:pointer;
 }
 
-.num-font{
-  font-family:'IBM Plex Mono',ui-monospace,monospace;
+.container{
+  width:min(1240px,94%);
+  margin:35px auto;
 }
 
-.main{
-  max-width:1240px;
-  width:100%;
-  margin:0 auto;
-  padding:36px 32px 60px;
-}
+/* HEADER */
 
-
-/* =========================
-   HEADER
-========================= */
-
-.topbar{
+.header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:18px;
-  margin-bottom:28px;
-  flex-wrap:wrap;
+  margin-bottom:24px;
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:11px;
-
-  font-size:19px;
-  font-weight:700;
-  letter-spacing:-.2px;
+  gap:12px;
 }
 
-.brand-logo{
-  width:34px;
-  height:34px;
-  object-fit:contain;
-  border-radius:8px;
-  display:block;
-}
-
-.month-nav{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.month-title{
-  font-size:22px;
-  font-weight:700;
-  letter-spacing:-.2px;
-  min-width:180px;
-  text-align:center;
-}
-
-.icon-btn,
-.today-btn{
+.logo{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  object-fit:cover;
   border:1px solid var(--border);
-  background:var(--panel);
-  color:#d7dade;
-
-  border-radius:var(--radius-sm);
-
-  padding:9px 13px;
-
-  transition:
-    background .15s ease,
-    border-color .15s ease;
 }
 
-.icon-btn:hover,
-.today-btn:hover{
-  background:var(--panel-hi);
-  border-color:#343b46;
+.title{
+  font-size:24px;
+  font-weight:700;
+  letter-spacing:-.5px;
 }
 
-.today-btn{
-  color:var(--gold-hi);
-  border-color:#5a4620;
-  font-weight:600;
+.subtitle{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:2px;
 }
 
-
-/* =========================
-   LAYOUT
-========================= */
+/* MAIN */
 
 .dashboard{
   display:grid;
-
-  grid-template-columns:
-    minmax(0,1.35fr)
-    minmax(280px,1fr);
-
+  grid-template-columns:1.35fr 1fr;
   gap:20px;
-
-  align-items:start;
 }
 
 .card{
   background:var(--panel);
-
   border:1px solid var(--border);
-
-  border-radius:var(--radius-lg);
-
+  border-radius:var(--radius);
   box-shadow:var(--shadow);
 }
 
-.side{
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-}
-
-
-/* =========================
-   CALENDAR
-========================= */
+/* CALENDAR */
 
 .calendar-card{
-  padding:18px;
+  padding:22px;
 }
 
-.week{
+.calendar-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+
+.month-title{
+  font-size:20px;
+  font-weight:700;
+}
+
+.calendar-actions{
+  display:flex;
+  gap:8px;
+}
+
+.icon-btn{
+  width:38px;
+  height:38px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:var(--panel-hi);
+  color:var(--text);
+}
+
+.icon-btn:hover{
+  border-color:var(--gold);
+  color:var(--gold-hi);
+}
+
+.today-btn{
+  padding:0 13px;
+  height:38px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:var(--panel-hi);
+  color:var(--muted);
+}
+
+.today-btn:hover{
+  border-color:var(--gold);
+  color:var(--gold-hi);
+}
+
+.weekdays,
+.calendar-grid{
   display:grid;
+  grid-template-columns:repeat(7,1fr);
+}
 
-  grid-template-columns:
-    repeat(7,1fr);
+.weekdays{
+  margin-bottom:8px;
+}
 
-  color:var(--faint);
-
-  font-size:12px;
-  font-weight:600;
-
+.weekdays div{
   text-align:center;
-
-  padding:2px 4px 12px;
-}
-
-.calendar{
-  display:grid;
-
-  grid-template-columns:
-    repeat(7,1fr);
-
-  gap:6px;
+  color:var(--faint);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.5px;
 }
 
 .day{
-  min-height:86px;
-
+  min-height:85px;
+  margin:3px;
+  padding:9px;
   border:1px solid var(--border-soft);
-
-  border-radius:var(--radius-md);
-
-  padding:10px;
-
-  position:relative;
-
-  cursor:pointer;
-
+  border-radius:12px;
   background:#0e1116;
-
-  transition:
-    background .15s ease,
-    border-color .15s ease,
-    transform .1s ease;
+  cursor:pointer;
+  transition:.15s ease;
 }
 
 .day:hover{
-  background:var(--panel-hi);
-  border-color:#2c333e;
-
+  border-color:#3b414b;
   transform:translateY(-1px);
 }
 
 .day.other{
-  color:var(--faint);
-
-  background:#0b0d11;
-
-  border-color:#171b21;
-}
-
-.day.other:hover{
-  transform:none;
-
-  background:#0d1015;
+  opacity:.35;
 }
 
 .day.today{
-  border-color:var(--gold);
-
-  box-shadow:
-    0 0 0 1px var(--gold) inset;
+  border-color:rgba(212,164,76,.6);
 }
 
 .day.selected{
-  background:#1a1710;
-
-  border-color:#5a4620;
+  box-shadow:inset 0 0 0 1px var(--gold);
 }
 
-.num{
+.day-number{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.day-pnl{
+  margin-top:20px;
   font-size:13px;
-
-  color:#c7cbd0;
-}
-
-.day.other .num{
-  color:var(--faint);
-}
-
-.pnl{
-  position:absolute;
-
-  left:10px;
-  bottom:9px;
-
-  font-size:12.5px;
   font-weight:700;
 }
 
@@ -307,647 +216,690 @@ button{
   color:var(--red);
 }
 
-.hint{
-  color:var(--faint);
-
-  font-size:12.5px;
-
-  padding:14px 2px 2px;
+.neutral{
+  color:var(--muted);
 }
 
+/* RIGHT SIDE */
 
-/* =========================
-   STARTING BALANCE
-========================= */
+.side{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+/* BALANCE */
 
 .balance-card{
-  padding:18px;
+  padding:20px;
+}
+
+.section-title{
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.7px;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+
+.input-group{
+  margin-top:15px;
 }
 
 .label{
-  font-size:12px;
+  font-size:11px;
+  color:var(--faint);
+  margin-bottom:7px;
+  letter-spacing:.5px;
+}
 
-  color:var(--muted);
-
-  font-weight:600;
-
-  margin-bottom:9px;
+.input-row{
+  display:flex;
+  gap:8px;
 }
 
 input{
   width:100%;
-
+  height:42px;
+  border-radius:10px;
+  border:1px solid var(--border);
   background:#0d1015;
-
-  border:1px solid #2b3138;
-
-  border-radius:var(--radius-sm);
-
   color:var(--text);
-
-  padding:11px 12px;
-
+  padding:0 12px;
   outline:none;
-
-  transition:border-color .15s ease;
 }
 
 input:focus{
   border-color:var(--gold);
 }
 
-.balance-row{
-  display:flex;
-
-  gap:8px;
-}
-
-.balance-row input{
-  flex:1;
-}
-
 .gold-btn{
-  background:
-    linear-gradient(
-      180deg,
-      var(--gold-hi),
-      var(--gold)
-    );
-
-  border:0;
-
-  color:#1a1408;
-
-  border-radius:var(--radius-sm);
-
+  height:42px;
   padding:0 16px;
-
+  border:0;
+  border-radius:10px;
+  background:var(--gold);
+  color:#17130a;
   font-weight:700;
-
-  font-size:13.5px;
-
-  white-space:nowrap;
 }
 
-
-/* =========================
-   MAX DAILY LOSS INPUT
-========================= */
-
-.daily-loss-input{
-  margin-top:18px;
-
-  padding-top:18px;
-
-  border-top:
-    1px solid var(--border-soft);
+.gold-btn:hover{
+  background:var(--gold-hi);
 }
 
-.daily-loss-input-row{
+/* SAVED SETTINGS */
+
+.saved-settings{
+  display:none;
+}
+
+.saved-settings.show{
+  display:block;
+}
+
+.setting-row{
   display:flex;
-
-  gap:8px;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 0;
+  border-bottom:1px solid var(--border-soft);
 }
 
-.daily-loss-input-row input{
-  flex:1;
+.setting-row:last-child{
+  border-bottom:0;
 }
 
+.setting-name{
+  font-size:12px;
+  color:var(--muted);
+}
 
-/* =========================
-   MONTHLY PERFORMANCE
-========================= */
+.setting-value{
+  font-size:14px;
+  font-weight:700;
+}
+
+.edit-settings{
+  margin-top:13px;
+  width:100%;
+  height:36px;
+  border-radius:9px;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.edit-settings:hover{
+  border-color:var(--gold);
+  color:var(--gold-hi);
+}
+
+/* STATS */
 
 .stats{
-  padding:18px;
+  padding:20px;
 }
 
-.section-title{
-  font-size:14.5px;
-
-  font-weight:700;
-
-  margin-bottom:14px;
-
-  letter-spacing:-.1px;
-}
-
-.balance-grid{
+.stats-grid{
   display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
+  grid-template-columns:1fr 1fr;
   gap:10px;
-
-  margin-bottom:10px;
+  margin-top:14px;
 }
 
 .stat{
-  border:1px solid var(--border-soft);
-
-  border-radius:var(--radius-md);
-
-  padding:14px;
-
   background:#0e1116;
+  border:1px solid var(--border-soft);
+  border-radius:12px;
+  padding:13px;
 }
 
-.stat small{
-  display:block;
-
-  color:var(--muted);
-
-  font-size:11.5px;
-
-  font-weight:600;
-
-  margin-bottom:7px;
+.stat-label{
+  color:var(--faint);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
 }
 
-.stat strong{
-  font-size:19px;
-
+.stat-value{
+  margin-top:5px;
+  font-size:15px;
   font-weight:700;
 }
 
-.metrics{
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:10px;
-}
-
-.metrics .stat{
-  padding:12px;
-}
-
-.metrics .stat strong{
-  font-size:16.5px;
-}
-
-
-/* =========================
-   DAILY LOSS BAR CARD
-========================= */
+/* DAILY LOSS */
 
 .daily-loss-card{
-  padding:18px;
+  padding:20px;
 }
 
 .daily-loss-header{
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
-
-  gap:10px;
-
-  margin-bottom:12px;
-}
-
-.daily-loss-header .section-title{
-  margin:0;
 }
 
 .daily-loss-amount{
-  color:#d7dade;
-
-  font-size:12px;
-
-  font-family:
-    'IBM Plex Mono',
-    monospace;
+  font-size:13px;
+  color:var(--muted);
 }
 
 .loss-bar{
-  width:100%;
-
   height:10px;
-
-  background:#0b0e12;
-
-  border:
-    1px solid var(--border-soft);
-
-  border-radius:999px;
-
+  margin-top:15px;
+  border-radius:20px;
+  background:#0b0e13;
+  border:1px solid var(--border);
   overflow:hidden;
 }
 
 .loss-bar-fill{
   width:0%;
-
   height:100%;
-
-  border-radius:999px;
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--gold),
-      var(--red)
-    );
-
-  transition:
-    width .3s ease;
+  border-radius:20px;
+  background:linear-gradient(
+    90deg,
+    var(--gold),
+    var(--red)
+  );
+  transition:width .25s ease;
 }
 
 .loss-status{
   margin-top:10px;
-
-  font-size:12px;
-
   color:var(--muted);
-
-  line-height:1.4;
+  font-size:11px;
 }
 
 .loss-warning{
   display:none;
-
-  margin-top:10px;
-
+  margin-top:12px;
   padding:10px 12px;
-
-  border-radius:var(--radius-sm);
-
+  border-radius:10px;
   background:var(--red-soft);
-
-  border:1px solid #5c2a2a;
-
-  color:#f0938f;
-
+  color:var(--red);
   font-size:12px;
-
   font-weight:700;
-
-  line-height:1.4;
 }
 
 .loss-warning.show{
   display:block;
 }
 
-
-/* =========================
-   TRADES LIST
-========================= */
+/* TRADES */
 
 .trades-card{
-  padding:18px;
-
-  max-height:360px;
-
-  overflow:auto;
+  padding:20px;
 }
 
-.trade{
-  display:grid;
-
-  grid-template-columns:
-    1fr
-    88px
-    56px
-    22px;
-
-  gap:10px;
-
-  align-items:center;
-
-  border-top:
-    1px solid var(--border-soft);
-
-  padding:11px 2px;
-
-  font-size:13px;
-}
-
-.trade:first-of-type{
-  border-top:0;
-}
-
-.delete{
-  background:none;
-
-  border:0;
-
+.trade-month{
   color:var(--faint);
-
-  font-size:16px;
-
-  border-radius:6px;
-
-  padding:2px 6px;
+  font-size:11px;
+  margin-top:3px;
 }
 
-.delete:hover{
+.trades-list{
+  margin-top:14px;
+  max-height:260px;
+  overflow-y:auto;
+}
+
+.trade-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:11px 0;
+  border-bottom:1px solid var(--border-soft);
+}
+
+.trade-row:last-child{
+  border-bottom:0;
+}
+
+.trade-date{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.trade-result{
+  font-size:13px;
+  font-weight:700;
+}
+
+.delete-btn{
+  margin-left:10px;
+  border:0;
+  background:none;
+  color:var(--faint);
+  font-size:17px;
+}
+
+.delete-btn:hover{
   color:var(--red);
 }
 
 .empty{
   color:var(--faint);
-
-  text-align:center;
-
-  padding:26px 5px;
-
-  font-size:13.5px;
+  font-size:12px;
+  padding:15px 0;
 }
 
+/* BOTTOM SETTINGS */
 
-/* =========================
-   RESET
-========================= */
-
-.reset-card{
-  margin-top:20px;
-
+.settings-bottom{
+  margin-top:22px;
+  padding:18px 20px;
+  border-radius:16px;
   border:1px solid var(--border);
-
   background:var(--panel);
-
-  border-radius:var(--radius-lg);
-
-  padding:16px 18px;
-
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
-
-  gap:14px;
-
-  flex-wrap:wrap;
+  gap:20px;
 }
 
-.reset-card strong{
-  font-size:13.5px;
-
-  font-weight:600;
+.settings-bottom-text{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
 }
 
-.reset-card p{
-  margin:4px 0 0;
+.settings-bottom-title{
+  font-size:13px;
+  font-weight:700;
+}
 
+.settings-bottom-subtitle{
+  font-size:11px;
+  color:var(--faint);
+}
+
+.bottom-edit-btn{
+  height:38px;
+  padding:0 16px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:var(--panel-hi);
   color:var(--muted);
+  white-space:nowrap;
+}
 
+.bottom-edit-btn:hover{
+  border-color:var(--gold);
+  color:var(--gold-hi);
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:10;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(400px,100%);
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 25px 80px rgba(0,0,0,.45);
+}
+
+.modal-title{
+  font-size:18px;
+  font-weight:700;
+}
+
+.modal-date{
+  margin-top:3px;
+  color:var(--muted);
   font-size:12px;
 }
 
-.reset-btn{
-  background:transparent;
-
-  border:1px solid #5c2a2a;
-
-  color:#f0938f;
-
-  padding:9px 16px;
-
-  border-radius:var(--radius-sm);
-
-  font-weight:600;
-
-  font-size:13px;
-
-  transition:background .15s ease;
-}
-
-.reset-btn:hover{
-  background:var(--red-soft);
-}
-
-
-/* =========================
-   MODAL
-========================= */
-
-.modal-backdrop{
-  display:none;
-
-  position:fixed;
-
-  inset:0;
-
-  background:rgba(5,6,8,.72);
-
-  align-items:center;
-
-  justify-content:center;
-
-  padding:20px;
-
-  z-index:5;
-
-  backdrop-filter:blur(2px);
-}
-
-.modal{
-  width:min(420px,100%);
-
-  background:var(--panel-hi);
-
-  border:1px solid var(--border);
-
-  border-radius:var(--radius-lg);
-
-  padding:24px;
-
-  box-shadow:var(--shadow);
-}
-
-.modal h2{
-  margin:0 0 6px;
-
-  font-size:18px;
-}
-
-.modal p{
-  color:var(--muted);
-
-  font-size:13px;
-
-  margin:0 0 16px;
-
-  line-height:1.5;
+.modal-input{
+  margin-top:18px;
 }
 
 .modal-actions{
   display:flex;
-
-  gap:10px;
-
-  margin-top:18px;
+  gap:8px;
+  margin-top:15px;
 }
 
-.modal-actions button{
+.cancel-btn{
   flex:1;
-
-  padding:11px;
-
-  border-radius:var(--radius-sm);
-
-  font-weight:700;
-
-  font-size:13.5px;
-}
-
-.cancel{
-  background:#181c22;
-
-  color:#d8dade;
-
+  height:42px;
+  border-radius:10px;
   border:1px solid var(--border);
+  background:var(--panel-hi);
+  color:var(--muted);
 }
 
-.save{
-  background:
-    linear-gradient(
-      180deg,
-      var(--gold-hi),
-      var(--gold)
-    );
-
+.save-trade-btn{
+  flex:1;
+  height:42px;
+  border-radius:10px;
   border:0;
-
-  color:#1a1408;
+  background:var(--gold);
+  color:#17130a;
+  font-weight:700;
 }
 
-
-/* =========================
-   RESPONSIVE
-========================= */
+/* RESPONSIVE */
 
 @media(max-width:1050px){
-
-  .main{
-    padding:22px 18px 48px;
-  }
-
   .dashboard{
     grid-template-columns:1fr;
   }
-
 }
 
-@media(max-width:640px){
+@media(max-width:600px){
 
-  .topbar{
-    align-items:flex-start;
-  }
-
-  .brand{
-    font-size:17px;
-  }
-
-  .brand-logo{
-    width:31px;
-    height:31px;
-  }
-
-  .month-nav{
-    width:100%;
-
-    justify-content:center;
-  }
-
-  .month-title{
-    font-size:19px;
-
-    min-width:150px;
+  .container{
+    width:94%;
+    margin:20px auto;
   }
 
   .day{
-    min-height:66px;
-
-    padding:8px;
+    min-height:62px;
+    padding:7px;
   }
 
-  .pnl{
-    left:8px;
-
-    bottom:7px;
-
+  .day-pnl{
+    margin-top:10px;
     font-size:11px;
   }
 
-  .metrics{
-    grid-template-columns:1fr 1fr;
+  .settings-bottom{
+    align-items:flex-start;
+    flex-direction:column;
   }
 
-  .trade{
-    grid-template-columns:
-      1fr
-      74px
-      50px
-      20px;
+  .bottom-edit-btn{
+    width:100%;
   }
-
 }
-
 </style>
 </head>
 
-
 <body>
 
-<main class="main">
+<div class="container">
+
+  <!-- HEADER -->
+
+  <div class="header">
+    <div class="brand">
+      <img src="logo.png" class="logo" alt="Logo">
+
+      <div>
+        <div class="title">Trade Journal</div>
+        <div class="subtitle">Track your performance. Stay disciplined.</div>
+      </div>
+    </div>
+  </div>
 
 
-<!-- =========================
-     HEADER
-========================== -->
+  <!-- DASHBOARD -->
 
-<div class="topbar">
+  <div class="dashboard">
 
-  <div class="brand">
+    <!-- CALENDAR -->
 
-    <img
-      src="logo.png"
-      alt="Trade Journal Logo"
-      class="brand-logo"
-    >
+    <div class="card calendar-card">
 
-    <span>
-      Trade Journal
-    </span>
+      <div class="calendar-top">
+
+        <div class="month-title" id="monthTitle"></div>
+
+        <div class="calendar-actions">
+          <button class="icon-btn" id="prevMonth">‹</button>
+          <button class="today-btn" id="todayBtn">Today</button>
+          <button class="icon-btn" id="nextMonth">›</button>
+        </div>
+
+      </div>
+
+      <div class="weekdays">
+        <div>MON</div>
+        <div>TUE</div>
+        <div>WED</div>
+        <div>THU</div>
+        <div>FRI</div>
+        <div>SAT</div>
+        <div>SUN</div>
+      </div>
+
+      <div class="calendar-grid" id="calendarGrid"></div>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="side">
+
+      <!-- BALANCE / SETTINGS -->
+
+      <div class="card balance-card">
+
+        <div class="section-title">Account Settings</div>
+
+        <!-- EDITABLE FORM -->
+
+        <div id="settingsForm">
+
+          <div class="input-group">
+
+            <div class="label">STARTING BALANCE</div>
+
+            <div class="input-row">
+
+              <input
+                id="startingBalance"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="5000"
+              >
+
+              <button class="gold-btn" id="saveBalance">
+                Save
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="input-group">
+
+            <div class="label">MAX DAILY LOSS</div>
+
+            <div class="input-row">
+
+              <input
+                id="maxDailyLoss"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="100"
+              >
+
+              <button class="gold-btn" id="saveDailyLoss">
+                Save
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- SAVED VALUES -->
+
+        <div class="saved-settings" id="savedSettings">
+
+          <div class="setting-row">
+
+            <span class="setting-name">
+              Starting Balance
+            </span>
+
+            <span class="setting-value" id="savedBalance">
+              $0.00
+            </span>
+
+          </div>
+
+
+          <div class="setting-row">
+
+            <span class="setting-name">
+              Max Daily Loss
+            </span>
+
+            <span class="setting-value" id="savedDailyLoss">
+              $0.00
+            </span>
+
+          </div>
+
+
+          <button class="edit-settings" id="editSettings">
+            Edit Settings
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- MONTHLY PERFORMANCE -->
+
+      <div class="card stats">
+
+        <div class="section-title">
+          Monthly Performance
+        </div>
+
+        <div class="stats-grid">
+
+          <div class="stat">
+            <div class="stat-label">Month Start</div>
+            <div class="stat-value" id="monthStart">$0.00</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-label">Month End</div>
+            <div class="stat-value" id="monthEnd">$0.00</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-label">Total P&L</div>
+            <div class="stat-value" id="monthPnl">$0.00</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-label">Win Rate</div>
+            <div class="stat-value" id="winRate">0%</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-label">Wins</div>
+            <div class="stat-value win" id="wins">0</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-label">Losses</div>
+            <div class="stat-value loss" id="losses">0</div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- DAILY LOSS -->
+
+      <div class="card daily-loss-card">
+
+        <div class="daily-loss-header">
+
+          <div class="section-title">
+            Daily Loss
+          </div>
+
+          <div class="daily-loss-amount" id="dailyLossAmount">
+            $0.00 / $0.00
+          </div>
+
+        </div>
+
+        <div class="loss-bar">
+          <div class="loss-bar-fill" id="lossBarFill"></div>
+        </div>
+
+        <div class="loss-status" id="lossStatus">
+          Set a max daily loss to activate the limit.
+        </div>
+
+        <div class="loss-warning" id="lossWarning">
+          ⚠️ Max daily loss reached — stop trading.
+        </div>
+
+      </div>
+
+
+      <!-- TRADES -->
+
+      <div class="card trades-card">
+
+        <div class="section-title">
+          Trades for this month
+        </div>
+
+        <div class="trade-month" id="tradeMonth"></div>
+
+        <div class="trades-list" id="tradesList"></div>
+
+      </div>
+
+    </div>
 
   </div>
 
 
-  <div class="month-nav">
+  <!-- BOTTOM SETTINGS -->
 
-    <button
-      class="icon-btn"
-      id="prev"
-    >
-      ‹
-    </button>
+  <div class="settings-bottom">
 
+    <div class="settings-bottom-text">
 
-    <div
-      class="month-title"
-      id="monthTitle"
-    ></div>
+      <div class="settings-bottom-title">
+        Journal Settings
+      </div>
 
+      <div class="settings-bottom-subtitle">
+        Change your starting balance or max daily loss anytime.
+      </div>
 
-    <button
-      class="icon-btn"
-      id="next"
-    >
-      ›
-    </button>
+    </div>
 
-
-    <button
-      class="today-btn"
-      id="today"
-    >
-      Today
+    <button class="bottom-edit-btn" id="bottomEditSettings">
+      Edit Settings
     </button>
 
   </div>
@@ -955,404 +907,40 @@ input:focus{
 </div>
 
 
+<!-- TRADE MODAL -->
 
-<!-- =========================
-     DASHBOARD
-========================== -->
+<div class="modal" id="tradeModal">
 
-<div class="dashboard">
+  <div class="modal-box">
 
-
-<!-- =========================
-     CALENDAR
-========================== -->
-
-<section>
-
-  <div class="card calendar-card">
-
-    <div class="week">
-
-      <div>Sun</div>
-      <div>Mon</div>
-      <div>Tue</div>
-      <div>Wed</div>
-      <div>Thu</div>
-      <div>Fri</div>
-      <div>Sat</div>
-
+    <div class="modal-title">
+      Add Trade Result
     </div>
 
+    <div class="modal-date" id="modalDate"></div>
 
-    <div
-      class="calendar"
-      id="calendar"
-    ></div>
+    <div class="modal-input">
 
-
-    <div class="hint">
-      Click any date to log or update your trade.
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================
-     RIGHT SIDE
-========================== -->
-
-<section class="side">
-
-
-<!-- STARTING BALANCE + MAX DAILY LOSS INPUT -->
-
-<div class="card balance-card">
-
-
-  <div class="label">
-    ACCOUNT STARTING BALANCE
-  </div>
-
-
-  <div class="balance-row">
-
-    <input
-      id="startingBalance"
-      type="number"
-      min="0"
-      step="0.01"
-      placeholder="10000"
-    >
-
-
-    <button
-      class="gold-btn"
-      id="saveBalance"
-    >
-      Save
-    </button>
-
-  </div>
-
-
-
-  <!-- MAX DAILY LOSS INPUT -->
-
-  <div class="daily-loss-input">
-
-    <div class="label">
-      MAX DAILY LOSS
-    </div>
-
-
-    <div class="daily-loss-input-row">
+      <div class="label">
+        P&L
+      </div>
 
       <input
-        id="maxDailyLoss"
+        id="pnlInput"
         type="number"
-        min="0"
         step="0.01"
-        placeholder="100"
+        placeholder="Example: 150 or -80"
       >
 
-
-      <button
-        class="gold-btn"
-        id="saveDailyLoss"
-      >
-        Save
-      </button>
-
     </div>
-
-  </div>
-
-</div>
-
-
-
-<!-- =========================
-     MONTHLY PERFORMANCE
-========================== -->
-
-<div class="card stats">
-
-  <div class="section-title">
-    Monthly Performance
-  </div>
-
-
-  <div class="balance-grid">
-
-    <div class="stat">
-
-      <small>
-        MONTH START
-      </small>
-
-      <strong
-        class="num-font"
-        id="monthStart"
-      >
-        —
-      </strong>
-
-    </div>
-
-
-    <div class="stat">
-
-      <small>
-        MONTH END
-      </small>
-
-      <strong
-        class="num-font"
-        id="monthEnd"
-      >
-        —
-      </strong>
-
-    </div>
-
-  </div>
-
-
-  <div class="metrics">
-
-    <div class="stat">
-
-      <small>
-        TOTAL P&L
-      </small>
-
-      <strong
-        class="num-font"
-        id="totalPnl"
-      >
-        —
-      </strong>
-
-    </div>
-
-
-    <div class="stat">
-
-      <small>
-        WIN RATE
-      </small>
-
-      <strong
-        class="num-font"
-        id="winRate"
-      >
-        —
-      </strong>
-
-    </div>
-
-
-    <div class="stat">
-
-      <small>
-        WINS
-      </small>
-
-      <strong
-        class="num-font"
-        id="wins"
-      >
-        0
-      </strong>
-
-    </div>
-
-
-    <div class="stat">
-
-      <small>
-        LOSSES
-      </small>
-
-      <strong
-        class="num-font"
-        id="losses"
-      >
-        0
-      </strong>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-
-<!-- =========================
-     DAILY LOSS BAR
-========================== -->
-
-<div
-  class="card daily-loss-card"
-  id="dailyLossCard"
->
-
-
-  <div class="daily-loss-header">
-
-    <div class="section-title">
-      Daily Loss
-    </div>
-
-
-    <div
-      class="daily-loss-amount"
-      id="dailyLossAmount"
-    >
-      $0.00 / $0.00
-    </div>
-
-  </div>
-
-
-  <div class="loss-bar">
-
-    <div
-      class="loss-bar-fill"
-      id="lossBarFill"
-    ></div>
-
-  </div>
-
-
-  <div
-    class="loss-status"
-    id="lossStatus"
-  >
-    No loss recorded for this day.
-  </div>
-
-
-  <div
-    class="loss-warning"
-    id="lossWarning"
-  >
-    ⚠️ Max daily loss reached — stop trading.
-  </div>
-
-</div>
-
-
-
-<!-- =========================
-     TRADES
-========================== -->
-
-<div class="card trades-card">
-
-  <div class="section-title">
-
-    Trades for
-    <span id="tradeMonth"></span>
-
-  </div>
-
-
-  <div id="tradeList"></div>
-
-</div>
-
-
-</section>
-
-</div>
-
-
-
-<!-- =========================
-     RESET
-========================== -->
-
-<div class="reset-card">
-
-  <div>
-
-    <strong>
-      Reset all data
-    </strong>
-
-    <p>
-      Permanently clears the starting balance,
-      max daily loss and every trade stored
-      in this browser.
-    </p>
-
-  </div>
-
-
-  <button
-    class="reset-btn"
-    id="reset"
-  >
-    Reset Journal
-  </button>
-
-</div>
-
-</main>
-
-
-
-<!-- =========================
-     MODAL
-========================== -->
-
-<div
-  class="modal-backdrop"
-  id="modal"
->
-
-  <div class="modal">
-
-
-    <h2 id="modalTitle">
-      Log Trade
-    </h2>
-
-
-    <p>
-      Enter the P&L for this date.
-      Use a positive number for a win
-      and a negative number for a loss.
-    </p>
-
-
-    <input
-      id="modalInput"
-      type="number"
-      step="0.01"
-      placeholder="e.g. 250 or -100"
-    >
-
 
     <div class="modal-actions">
 
-      <button
-        class="cancel"
-        id="cancel"
-      >
+      <button class="cancel-btn" id="cancelModal">
         Cancel
       </button>
 
-
-      <button
-        class="save"
-        id="modalSave"
-      >
+      <button class="save-trade-btn" id="saveTradeBtn">
         Save Trade
       </button>
 
@@ -1363,28 +951,14 @@ input:focus{
 </div>
 
 
-
 <script>
 
-/* =========================
-   DATA
-========================= */
+const KEY = "tradeJournal_v1";
 
-const KEY =
-  "tradeJournal_v1";
-
-
-let data =
-  JSON.parse(
-    localStorage.getItem(KEY) ||
-    '{"startingBalance":0,"maxDailyLoss":0,"trades":{}}'
-  );
-
-
-/*
-  Make sure older saved data
-  continues working.
-*/
+let data = JSON.parse(
+  localStorage.getItem(KEY) ||
+  '{"startingBalance":0,"maxDailyLoss":0,"trades":{}}'
+);
 
 if(!data.trades){
   data.trades = {};
@@ -1395,15 +969,10 @@ if(data.maxDailyLoss === undefined){
 }
 
 
-let view =
-  new Date();
-
+let view = new Date();
 view.setDate(1);
 
-
-let selectedDate =
-  localDate(new Date());
-
+let selectedDate = localDate(new Date());
 
 
 /* =========================
@@ -1412,12 +981,13 @@ let selectedDate =
 
 function localDate(d){
 
-  return `${d.getFullYear()}-${
-    String(d.getMonth()+1).padStart(2,'0')
-  }-${
-    String(d.getDate()).padStart(2,'0')
-  }`;
+  const y = d.getFullYear();
 
+  const m = String(d.getMonth() + 1).padStart(2,"0");
+
+  const day = String(d.getDate()).padStart(2,"0");
+
+  return `${y}-${m}-${day}`;
 }
 
 
@@ -1434,41 +1004,46 @@ function save(){
 function money(n){
 
   return new Intl.NumberFormat(
-    undefined,
+    "en-US",
     {
       minimumFractionDigits:2,
       maximumFractionDigits:2
     }
-  ).format(n);
+  ).format(Number(n) || 0);
 
 }
 
 
 function fmtPnl(n){
 
-  return (
-    n >= 0
-      ? "+"
-      : "-"
-  ) + "$" +
-    money(Math.abs(n));
+  n = Number(n) || 0;
+
+  if(n > 0){
+    return "+$" + money(n);
+  }
+
+  if(n < 0){
+    return "-$" + money(Math.abs(n));
+  }
+
+  return "$0.00";
 
 }
 
 
 function monthKey(d){
 
-  return `${d.getFullYear()}-${
-    String(d.getMonth()+1).padStart(2,'0')
-  }`;
+  return `${d.getFullYear()}-${String(
+    d.getMonth()+1
+  ).padStart(2,"0")}`;
 
 }
 
 
 function monthName(d){
 
-  return d.toLocaleString(
-    undefined,
+  return d.toLocaleDateString(
+    "en-US",
     {
       month:"long",
       year:"numeric"
@@ -1480,42 +1055,31 @@ function monthName(d){
 
 function sortedTrades(){
 
-  return Object.entries(
-    data.trades
-  ).sort(
-    (a,b) =>
-      a[0].localeCompare(b[0])
-  );
+  return Object.entries(data.trades)
+    .sort(
+      (a,b) =>
+        new Date(a[0]) - new Date(b[0])
+    );
 
 }
 
 
-/* =========================
-   BALANCE CALCULATION
-========================= */
-
 function balanceBefore(key){
 
-  let bal =
+  let balance =
     Number(data.startingBalance) || 0;
 
-
-  for(
-    const [date,t]
-    of sortedTrades()
-  ){
+  for(const [date,trade] of sortedTrades()){
 
     if(date < key){
 
-      bal +=
-        Number(t.pnl);
+      balance += Number(trade.pnl) || 0;
 
     }
 
   }
 
-
-  return bal;
+  return balance;
 
 }
 
@@ -1526,53 +1090,56 @@ function balanceBefore(key){
 
 function monthStats(){
 
-  const key =
-    monthKey(view);
+  const key = monthKey(view);
 
+  const trades =
+    Object.entries(data.trades)
+    .filter(
+      ([date]) => date.startsWith(key)
+    );
 
-  const entries =
-    sortedTrades()
-      .filter(
-        ([date]) =>
-          date.startsWith(key)
-      );
+  let pnl = 0;
+  let wins = 0;
+  let losses = 0;
 
+  for(const [,trade] of trades){
+
+    const value =
+      Number(trade.pnl) || 0;
+
+    pnl += value;
+
+    if(value > 0){
+      wins++;
+    }
+
+    if(value < 0){
+      losses++;
+    }
+
+  }
 
   const start =
-    balanceBefore(
-      `${key}-01`
-    );
+    balanceBefore(key + "-01");
 
+  const end =
+    start + pnl;
 
-  const pnl =
-    entries.reduce(
-      (s,[,t]) =>
-        s + Number(t.pnl),
-      0
-    );
+  const total =
+    wins + losses;
 
-
-  const wins =
-    entries.filter(
-      ([,t]) =>
-        Number(t.pnl) > 0
-    ).length;
-
-
-  const losses =
-    entries.filter(
-      ([,t]) =>
-        Number(t.pnl) < 0
-    ).length;
-
+  const rate =
+    total > 0
+      ? (wins / total) * 100
+      : 0;
 
   return {
-    entries,
     start,
-    end:start+pnl,
+    end,
     pnl,
     wins,
-    losses
+    losses,
+    rate
   };
 
 }
@@ -1587,114 +1154,66 @@ function getDailyLoss(){
   const trade =
     data.trades[selectedDate];
 
-
   if(!trade){
-
     return 0;
-
   }
-
 
   const pnl =
     Number(trade.pnl);
 
-
-  /*
-    Positive P&L = no daily loss.
-    Negative P&L = daily loss.
-  */
-
   if(pnl >= 0){
-
     return 0;
-
   }
-
 
   return Math.abs(pnl);
 
 }
 
 
-/* =========================
-   RENDER DAILY LOSS BAR
-========================= */
-
 function renderDailyLoss(){
 
   const max =
     Number(data.maxDailyLoss) || 0;
 
-
   const loss =
     getDailyLoss();
 
-
   const fill =
-    document.getElementById(
-      "lossBarFill"
-    );
-
+    document.getElementById("lossBarFill");
 
   const amount =
-    document.getElementById(
-      "dailyLossAmount"
-    );
-
+    document.getElementById("dailyLossAmount");
 
   const status =
-    document.getElementById(
-      "lossStatus"
-    );
-
+    document.getElementById("lossStatus");
 
   const warning =
-    document.getElementById(
-      "lossWarning"
-    );
+    document.getElementById("lossWarning");
 
-
-  /*
-    No max daily loss entered.
-  */
 
   if(max <= 0){
 
-    fill.style.width =
-      "0%";
-
+    fill.style.width = "0%";
 
     amount.textContent =
       "$0.00 / $0.00";
 
-
     status.textContent =
       "Set a max daily loss to activate the limit.";
 
-
-    warning.classList.remove(
-      "show"
-    );
+    warning.classList.remove("show");
 
     return;
 
   }
 
 
-  /*
-    Calculate percentage.
-  */
-
   let percentage =
     (loss / max) * 100;
 
-
   percentage =
     Math.min(
-      Math.max(
-        percentage,
-        0
-      ),
+      Math.max(percentage,0),
       100
     );
 
@@ -1704,15 +1223,9 @@ function renderDailyLoss(){
 
 
   amount.textContent =
-    "$" +
-    money(loss) +
-    " / $" +
-    money(max);
+    "$" + money(loss) +
+    " / $" + money(max);
 
-
-  /*
-    No loss.
-  */
 
   if(loss === 0){
 
@@ -1720,85 +1233,29 @@ function renderDailyLoss(){
       "No loss recorded for this day.";
 
   }
-
-
-  /*
-    Loss exists but limit
-    has not been reached.
-  */
-
   else if(loss < max){
 
     status.textContent =
+      "$" +
       money(max - loss) +
       " remaining before max daily loss.";
 
   }
 
 
-  /*
-    Max loss reached.
-  */
-
   if(loss >= max){
 
     status.textContent =
       "Daily loss limit has been reached.";
 
-    warning.classList.add(
-      "show"
-    );
+    warning.classList.add("show");
 
   }
-
   else{
 
-    warning.classList.remove(
-      "show"
-    );
+    warning.classList.remove("show");
 
   }
-
-}
-
-
-/* =========================
-   RENDER
-========================= */
-
-function render(){
-
-  document.getElementById(
-    "monthTitle"
-  ).textContent =
-    monthName(view);
-
-
-  document.getElementById(
-    "tradeMonth"
-  ).textContent =
-    monthName(view);
-
-
-  document.getElementById(
-    "startingBalance"
-  ).value =
-    data.startingBalance || "";
-
-
-  document.getElementById(
-    "maxDailyLoss"
-  ).value =
-    data.maxDailyLoss || "";
-
-
-  renderCalendar();
-
-  renderStats();
-
-  renderTrades();
-
-  renderDailyLoss();
 
 }
 
@@ -1809,236 +1266,172 @@ function render(){
 
 function renderCalendar(){
 
-  const cal =
-    document.getElementById(
-      "calendar"
-    );
+  const grid =
+    document.getElementById("calendarGrid");
+
+  grid.innerHTML = "";
 
 
-  cal.innerHTML = "";
+  document.getElementById("monthTitle")
+    .textContent = monthName(view);
 
 
-  const y =
+  const year =
     view.getFullYear();
 
-
-  const m =
+  const month =
     view.getMonth();
 
 
-  const first =
-    new Date(
-      y,
-      m,
-      1
-    );
+  const firstDay =
+    new Date(year,month,1);
+
+  let start =
+    firstDay.getDay();
+
+  start =
+    start === 0 ? 6 : start - 1;
 
 
-  const days =
-    new Date(
-      y,
-      m + 1,
-      0
-    ).getDate();
+  const daysInMonth =
+    new Date(year,month+1,0)
+      .getDate();
 
 
-  const prevDays =
-    new Date(
-      y,
-      m,
-      0
-    ).getDate();
+  const daysPrevMonth =
+    new Date(year,month,0)
+      .getDate();
 
 
-  const total =
+  const totalCells =
     Math.ceil(
-      (
-        first.getDay() +
-        days
-      ) / 7
+      (start + daysInMonth) / 7
     ) * 7;
 
 
-  const today =
-    localDate(
-      new Date()
-    );
+  for(let i=0;i<totalCells;i++){
+
+    const cell =
+      document.createElement("div");
+
+    cell.className = "day";
 
 
-  for(
-    let i=0;
-    i<total;
-    i++
-  ){
-
-    let n =
-      i -
-      first.getDay() +
-      1;
+    let dayNumber;
+    let dateObj;
 
 
-    let d;
+    if(i < start){
 
-    let other =
-      false;
+      dayNumber =
+        daysPrevMonth - start + i + 1;
 
+      dateObj =
+        new Date(year,month-1,dayNumber);
 
-    if(n < 1){
-
-      n =
-        prevDays + n;
-
-
-      d =
-        new Date(
-          y,
-          m - 1,
-          n
-        );
-
-
-      other =
-        true;
+      cell.classList.add("other");
 
     }
+    else if(i >= start + daysInMonth){
 
-    else if(n > days){
+      dayNumber =
+        i - start - daysInMonth + 1;
 
-      n =
-        n - days;
+      dateObj =
+        new Date(year,month+1,dayNumber);
 
-
-      d =
-        new Date(
-          y,
-          m + 1,
-          n
-        );
-
-
-      other =
-        true;
+      cell.classList.add("other");
 
     }
-
     else{
 
-      d =
-        new Date(
-          y,
-          m,
-          n
-        );
+      dayNumber =
+        i - start + 1;
+
+      dateObj =
+        new Date(year,month,dayNumber);
 
     }
 
 
     const key =
-      localDate(d);
+      localDate(dateObj);
+
+
+    if(key === localDate(new Date())){
+      cell.classList.add("today");
+    }
+
+
+    if(key === selectedDate){
+      cell.classList.add("selected");
+    }
+
+
+    const number =
+      document.createElement("div");
+
+    number.className =
+      "day-number";
+
+    number.textContent =
+      dayNumber;
+
+
+    cell.appendChild(number);
 
 
     const trade =
       data.trades[key];
 
 
-    const el =
-      document.createElement(
-        "div"
-      );
-
-
-    el.className =
-      "day" +
-
-      (
-        other
-        ? " other"
-        : ""
-      ) +
-
-      (
-        key === today
-        ? " today"
-        : ""
-      ) +
-
-      (
-        key === selectedDate
-        ? " selected"
-        : ""
-      );
-
-
-    el.innerHTML = `
-
-      <div class="num">
-        ${n}
-      </div>
-
-      ${
-        trade
-
-        ?
-
-        `<div class="pnl ${
-          Number(trade.pnl) >= 0
-            ? "win"
-            : "loss"
-        }">
-
-          ${fmtPnl(
-            Number(trade.pnl)
-          )}
-
-        </div>`
-
-        :
-
-        ""
-      }
-
-    `;
-
-
     if(trade){
 
-      el.title =
-        Number(trade.pnl) >= 0
-          ? "Win"
-          : "Loss";
+      const pnl =
+        Number(trade.pnl) || 0;
+
+
+      const pnlDiv =
+        document.createElement("div");
+
+      pnlDiv.className =
+        "day-pnl " +
+        (
+          pnl > 0
+            ? "win"
+            : pnl < 0
+              ? "loss"
+              : "neutral"
+        );
+
+
+      pnlDiv.textContent =
+        fmtPnl(pnl);
+
+
+      cell.appendChild(pnlDiv);
 
     }
 
 
-    el.onclick = () => {
+    cell.onclick = () => {
 
-      selectedDate =
-        key;
+      selectedDate = key;
 
-
-      if(!other){
-
-        openModal(key);
-
-      }
-
-      else{
-
-        view =
-          new Date(d);
+      view =
+        new Date(
+          dateObj.getFullYear(),
+          dateObj.getMonth(),
+          1
+        );
 
 
-        view.setDate(1);
-
-
-        openModal(key);
-
-      }
+      openModal(key);
 
     };
 
 
-    cal.appendChild(el);
+    grid.appendChild(cell);
 
   }
 
@@ -2046,290 +1439,345 @@ function renderCalendar(){
 
 
 /* =========================
-   MONTHLY STATS
+   MONTHLY PERFORMANCE
 ========================= */
 
 function renderStats(){
 
-  const s =
+  const stats =
     monthStats();
 
 
-  document.getElementById(
-    "monthStart"
-  ).textContent =
-    "$" +
-    money(s.start);
+  document.getElementById("monthStart")
+    .textContent =
+      "$" + money(stats.start);
 
 
-  document.getElementById(
-    "monthEnd"
-  ).textContent =
-    "$" +
-    money(s.end);
+  document.getElementById("monthEnd")
+    .textContent =
+      "$" + money(stats.end);
 
 
   const pnl =
-    document.getElementById(
-      "totalPnl"
-    );
-
+    document.getElementById("monthPnl");
 
   pnl.textContent =
-    fmtPnl(s.pnl);
-
+    fmtPnl(stats.pnl);
 
   pnl.className =
-    "num-font " +
+    "stat-value " +
     (
-      s.pnl >= 0
+      stats.pnl > 0
         ? "win"
-        : "loss"
+        : stats.pnl < 0
+          ? "loss"
+          : "neutral"
     );
 
 
-  document.getElementById(
-    "winRate"
-  ).textContent =
-
-    (
-
-      s.wins +
-      s.losses
-
-      ?
-
-      (
-        s.wins /
-        (
-          s.wins +
-          s.losses
-        ) *
-        100
-      ).toFixed(2)
-
-      :
-
-      "0.00"
-
-    ) + "%";
+  document.getElementById("winRate")
+    .textContent =
+      stats.rate.toFixed(1) + "%";
 
 
-  document.getElementById(
-    "wins"
-  ).textContent =
-    s.wins;
+  document.getElementById("wins")
+    .textContent =
+      stats.wins;
 
 
-  document.getElementById(
-    "losses"
-  ).textContent =
-    s.losses;
+  document.getElementById("losses")
+    .textContent =
+      stats.losses;
 
 }
 
 
 /* =========================
-   TRADES
+   TRADES LIST
 ========================= */
 
 function renderTrades(){
 
-  const box =
-    document.getElementById(
-      "tradeList"
+  const list =
+    document.getElementById("tradesList");
+
+  list.innerHTML = "";
+
+
+  const key =
+    monthKey(view);
+
+
+  document.getElementById("tradeMonth")
+    .textContent =
+      monthName(view);
+
+
+  const trades =
+    Object.entries(data.trades)
+    .filter(
+      ([date]) => date.startsWith(key)
+    )
+    .sort(
+      (a,b) =>
+        new Date(b[0]) - new Date(a[0])
     );
 
 
-  const entries =
-    monthStats()
-      .entries
-      .sort(
-        (a,b) =>
-          b[0].localeCompare(
-            a[0]
-          )
-      );
+  if(trades.length === 0){
 
-
-  if(!entries.length){
-
-    box.innerHTML =
-      '<div class="empty">No trades logged this month.</div>';
+    list.innerHTML =
+      `<div class="empty">
+        No trades recorded this month.
+      </div>`;
 
     return;
 
   }
 
 
-  box.innerHTML =
-    entries.map(
-      ([date,t]) => {
+  for(const [date,trade] of trades){
 
-        const d =
-          new Date(
-            date +
-            "T00:00:00"
-          );
+    const value =
+      Number(trade.pnl) || 0;
 
 
-        return `
+    const row =
+      document.createElement("div");
 
-          <div class="trade">
-
-            <div>
-
-              ${
-                d.toLocaleDateString(
-                  undefined,
-                  {
-                    month:"short",
-                    day:"2-digit",
-                    year:"numeric"
-                  }
-                )
-              }
-
-            </div>
+    row.className =
+      "trade-row";
 
 
-            <div
-              class="num-font ${
-                Number(t.pnl) >= 0
-                  ? "win"
-                  : "loss"
-              }"
-            >
+    const dateDiv =
+      document.createElement("div");
 
-              ${fmtPnl(
-                Number(t.pnl)
-              )}
+    dateDiv.className =
+      "trade-date";
 
-            </div>
-
-
-            <div
-              class="${
-                Number(t.pnl) >= 0
-                  ? "win"
-                  : "loss"
-              }"
-            >
-
-              ${
-                Number(t.pnl) >= 0
-                  ? "Win"
-                  : "Loss"
-              }
-
-            </div>
+    dateDiv.textContent =
+      new Date(
+        date + "T00:00:00"
+      ).toLocaleDateString(
+        "en-US",
+        {
+          month:"short",
+          day:"numeric"
+        }
+      );
 
 
-            <button
-              class="delete"
-              onclick="deleteTrade('${date}')"
-            >
-              ×
-            </button>
+    const right =
+      document.createElement("div");
 
-          </div>
 
-        `;
+    const result =
+      document.createElement("span");
 
-      }
-    ).join("");
+    result.className =
+      "trade-result " +
+      (
+        value > 0
+          ? "win"
+          : value < 0
+            ? "loss"
+            : "neutral"
+      );
+
+
+    result.textContent =
+      fmtPnl(value);
+
+
+    const del =
+      document.createElement("button");
+
+    del.className =
+      "delete-btn";
+
+    del.textContent =
+      "×";
+
+
+    del.onclick = () =>
+      deleteTrade(date);
+
+
+    right.appendChild(result);
+    right.appendChild(del);
+
+
+    row.appendChild(dateDiv);
+    row.appendChild(right);
+
+
+    list.appendChild(row);
+
+  }
 
 }
 
 
 /* =========================
-   OPEN MODAL
+   SETTINGS UI
 ========================= */
+
+function renderSettings(){
+
+  const form =
+    document.getElementById("settingsForm");
+
+  const saved =
+    document.getElementById("savedSettings");
+
+
+  const hasBalance =
+    Number(data.startingBalance) > 0;
+
+  const hasDailyLoss =
+    Number(data.maxDailyLoss) > 0;
+
+
+  /*
+    Show the saved version only when
+    BOTH settings have been saved.
+  */
+
+  if(hasBalance && hasDailyLoss){
+
+    form.style.display = "none";
+
+    saved.classList.add("show");
+
+
+    document.getElementById("savedBalance")
+      .textContent =
+        "$" + money(data.startingBalance);
+
+
+    document.getElementById("savedDailyLoss")
+      .textContent =
+        "$" + money(data.maxDailyLoss);
+
+  }
+  else{
+
+    form.style.display = "block";
+
+    saved.classList.remove("show");
+
+
+    document.getElementById("startingBalance")
+      .value =
+        hasBalance
+          ? data.startingBalance
+          : "";
+
+
+    document.getElementById("maxDailyLoss")
+      .value =
+        hasDailyLoss
+          ? data.maxDailyLoss
+          : "";
+
+  }
+
+}
+
+
+/* =========================
+   MAIN RENDER
+========================= */
+
+function render(){
+
+  renderCalendar();
+
+  renderStats();
+
+  renderTrades();
+
+  renderDailyLoss();
+
+  renderSettings();
+
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+const modal =
+  document.getElementById("tradeModal");
+
 
 function openModal(key){
 
-  selectedDate =
-    key;
+  selectedDate = key;
 
 
-  document.getElementById(
-    "modalTitle"
-  ).textContent =
-
-    "Log Trade — " +
-
+  const date =
     new Date(
-      key +
-      "T00:00:00"
-    ).toLocaleDateString(
-      undefined,
-      {
-        month:"long",
-        day:"numeric",
-        year:"numeric"
-      }
+      key + "T00:00:00"
     );
 
 
-  const input =
-    document.getElementById(
-      "modalInput"
-    );
+  document.getElementById("modalDate")
+    .textContent =
+      date.toLocaleDateString(
+        "en-US",
+        {
+          weekday:"long",
+          month:"long",
+          day:"numeric",
+          year:"numeric"
+        }
+      );
 
 
-  input.value =
-    data.trades[key]
-      ? data.trades[key].pnl
-      : "";
+  const existing =
+    data.trades[key];
 
 
-  document.getElementById(
-    "modal"
-  ).style.display =
-    "flex";
+  document.getElementById("pnlInput")
+    .value =
+      existing
+        ? existing.pnl
+        : "";
+
+
+  modal.classList.add("show");
 
 
   setTimeout(
-    () => input.focus(),
+    () =>
+      document.getElementById("pnlInput")
+        .focus(),
     50
   );
 
 }
 
 
-/* =========================
-   CLOSE MODAL
-========================= */
-
 function closeModal(){
 
-  document.getElementById(
-    "modal"
-  ).style.display =
-    "none";
+  modal.classList.remove("show");
 
 }
 
 
-/* =========================
-   SAVE TRADE
-========================= */
-
 function saveTrade(){
 
   const input =
-    document.getElementById(
-      "modalInput"
-    );
-
-
-  const value =
-    Number(input.value);
+    document.getElementById("pnlInput");
 
 
   if(
     input.value === "" ||
-    !Number.isFinite(value)
+    !Number.isFinite(
+      Number(input.value)
+    )
   ){
 
     alert(
@@ -2341,27 +1789,23 @@ function saveTrade(){
   }
 
 
+  const value =
+    Number(input.value);
+
+
   data.trades[selectedDate] = {
-
     pnl:value
-
   };
 
 
   save();
 
-
   closeModal();
-
 
   render();
 
 }
 
-
-/* =========================
-   DELETE TRADE
-========================= */
 
 function deleteTrade(date){
 
@@ -2370,17 +1814,13 @@ function deleteTrade(date){
       "Delete this trade?"
     )
   ){
-
     return;
-
   }
 
 
   delete data.trades[date];
 
-
   save();
-
 
   render();
 
@@ -2391,247 +1831,216 @@ function deleteTrade(date){
    STARTING BALANCE
 ========================= */
 
-document.getElementById(
-  "saveBalance"
-).onclick = () => {
+document.getElementById("saveBalance")
+  .onclick = () => {
 
-  const input =
-    document.getElementById(
-      "startingBalance"
-    );
+    const input =
+      document.getElementById("startingBalance");
 
-
-  const value =
-    Number(input.value);
+    const value =
+      Number(input.value);
 
 
-  if(
-    input.value === "" ||
-    !Number.isFinite(value) ||
-    value < 0
-  ){
+    if(
+      input.value === "" ||
+      !Number.isFinite(value) ||
+      value < 0
+    ){
 
-    alert(
-      "Please enter a valid starting balance."
-    );
+      alert(
+        "Please enter a valid starting balance."
+      );
 
-    return;
+      return;
 
-  }
-
-
-  data.startingBalance =
-    value;
+    }
 
 
-  save();
+    data.startingBalance =
+      value;
 
 
-  render();
+    save();
 
-};
+    render();
+
+  };
 
 
 /* =========================
    MAX DAILY LOSS
 ========================= */
 
-document.getElementById(
-  "saveDailyLoss"
-).onclick = () => {
+document.getElementById("saveDailyLoss")
+  .onclick = () => {
 
-  const input =
-    document.getElementById(
-      "maxDailyLoss"
-    );
+    const input =
+      document.getElementById("maxDailyLoss");
 
-
-  const value =
-    Number(input.value);
+    const value =
+      Number(input.value);
 
 
-  if(
-    input.value === "" ||
-    !Number.isFinite(value) ||
-    value <= 0
-  ){
+    if(
+      input.value === "" ||
+      !Number.isFinite(value) ||
+      value <= 0
+    ){
 
-    alert(
-      "Please enter a valid max daily loss."
-    );
+      alert(
+        "Please enter a valid max daily loss."
+      );
 
-    return;
+      return;
 
-  }
-
-
-  data.maxDailyLoss =
-    value;
+    }
 
 
-  save();
+    data.maxDailyLoss =
+      value;
 
 
-  render();
+    save();
 
-};
+    render();
+
+  };
 
 
 /* =========================
-   MODAL CONTROLS
+   EDIT SETTINGS
 ========================= */
 
-document.getElementById(
-  "cancel"
-).onclick =
-  closeModal;
+function editSettings(){
+
+  const form =
+    document.getElementById("settingsForm");
+
+  const saved =
+    document.getElementById("savedSettings");
 
 
-document.getElementById(
-  "modalSave"
-).onclick =
-  saveTrade;
+  form.style.display = "block";
+
+  saved.classList.remove("show");
 
 
-document.getElementById(
-  "modalInput"
-).addEventListener(
-  "keydown",
-  e => {
-
-    if(e.key === "Enter"){
-
-      saveTrade();
-
-    }
-
-    if(e.key === "Escape"){
-
-      closeModal();
-
-    }
-
-  }
-);
+  document.getElementById("startingBalance")
+    .value =
+      data.startingBalance || "";
 
 
-document.getElementById(
-  "modal"
-).addEventListener(
-  "click",
-  e => {
+  document.getElementById("maxDailyLoss")
+    .value =
+      data.maxDailyLoss || "";
 
-    if(
-      e.target.id === "modal"
-    ){
 
-      closeModal();
+  document.getElementById("startingBalance")
+    .focus();
 
-    }
+}
 
-  }
-);
+
+document.getElementById("editSettings")
+  .onclick =
+    editSettings;
+
+
+document.getElementById("bottomEditSettings")
+  .onclick =
+    editSettings;
 
 
 /* =========================
    MONTH NAVIGATION
 ========================= */
 
-document.getElementById(
-  "prev"
-).onclick = () => {
+document.getElementById("prevMonth")
+  .onclick = () => {
 
-  view.setMonth(
-    view.getMonth() - 1
-  );
-
-  render();
-
-};
-
-
-document.getElementById(
-  "next"
-).onclick = () => {
-
-  view.setMonth(
-    view.getMonth() + 1
-  );
-
-  render();
-
-};
-
-
-document.getElementById(
-  "today"
-).onclick = () => {
-
-  const now =
-    new Date();
-
-
-  view =
-    new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      1
+    view.setMonth(
+      view.getMonth() - 1
     );
 
-
-  selectedDate =
-    localDate(now);
-
-
-  render();
-
-};
-
-
-/* =========================
-   RESET
-========================= */
-
-document.getElementById(
-  "reset"
-).onclick = () => {
-
-  const confirmed =
-    confirm(
-      "Are you sure you want to permanently delete your entire trading journal?"
-    );
-
-
-  if(!confirmed){
-
-    return;
-
-  }
-
-
-  data = {
-
-    startingBalance:0,
-
-    maxDailyLoss:0,
-
-    trades:{}
+    render();
 
   };
 
 
-  selectedDate =
-    localDate(
-      new Date()
+document.getElementById("nextMonth")
+  .onclick = () => {
+
+    view.setMonth(
+      view.getMonth() + 1
     );
 
+    render();
 
-  save();
+  };
 
 
-  render();
+document.getElementById("todayBtn")
+  .onclick = () => {
 
-};
+    const today =
+      new Date();
+
+    selectedDate =
+      localDate(today);
+
+    view =
+      new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        1
+      );
+
+    render();
+
+  };
+
+
+/* =========================
+   MODAL EVENTS
+========================= */
+
+document.getElementById("cancelModal")
+  .onclick =
+    closeModal;
+
+
+document.getElementById("saveTradeBtn")
+  .onclick =
+    saveTrade;
+
+
+document.getElementById("pnlInput")
+  .addEventListener(
+    "keydown",
+    e => {
+
+      if(e.key === "Enter"){
+        saveTrade();
+      }
+
+      if(e.key === "Escape"){
+        closeModal();
+      }
+
+    }
+  );
+
+
+modal.addEventListener(
+  "click",
+  e => {
+
+    if(e.target === modal){
+      closeModal();
+    }
+
+  }
+);
 
 
 /* =========================
@@ -2644,3 +2053,5 @@ render();
 
 </body>
 </html>
+
+This version keeps the main dashboard much cleaner: once both values are saved, the two input fields disappear and only the saved values are shown. The Edit Settings button at the bottom brings both inputs back whenever you need to change them.
