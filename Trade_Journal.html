@@ -8,26 +8,6 @@
 <style>
 
 :root{
-  --bg:#0a0c10;
-  --panel:#12151b;
-  --panel-hi:#161a21;
-  --border:#242a33;
-  --border-soft:#1c212a;
-  --text:#f2f3f4;
-  --muted:#8b929c;
-  --faint:#565d67;
-  --gold:#d4a44c;
-  --gold-hi:#ecc772;
-  --green:#3ecf8e;
-  --red:#f0605e;
-  --red-soft:rgba(240,96,94,.12);
-  --radius:18px;
-  --radius-sm:12px;
-  --shadow:0 18px 50px rgba(0,0,0,.28);
-}
-
-/* ========= LIGHT THEME ========= */
-html[data-theme="light"]{
   --bg:#f4f5f7;
   --panel:#ffffff;
   --panel-hi:#f0f1f4;
@@ -36,11 +16,13 @@ html[data-theme="light"]{
   --text:#14161a;
   --muted:#6b717c;
   --faint:#9aa0aa;
-  --gold:#b9873a;
-  --gold-hi:#a06f28;
+  --gold:#2563eb;
+  --gold-hi:#1d4ed8;
   --green:#1f9d63;
   --red:#d8433f;
   --red-soft:rgba(216,67,63,.10);
+  --radius:18px;
+  --radius-sm:12px;
   --shadow:0 12px 34px rgba(20,22,26,.08);
 }
 
@@ -53,7 +35,6 @@ body{
   background:var(--bg);
   color:var(--text);
   font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  transition:background .2s ease,color .2s ease;
 }
 
 button,
@@ -114,25 +95,6 @@ button{
   gap:10px;
 }
 
-.theme-toggle{
-  width:42px;
-  height:42px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  background:var(--panel-hi);
-  color:var(--text);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:18px;
-  transition:.15s ease;
-}
-
-.theme-toggle:hover{
-  border-color:var(--gold);
-  color:var(--gold-hi);
-}
-
 
 /* =========================
    MAIN
@@ -149,7 +111,6 @@ button{
   border:1px solid var(--border);
   border-radius:var(--radius);
   box-shadow:var(--shadow);
-  transition:background .2s ease,border-color .2s ease;
 }
 
 
@@ -236,12 +197,8 @@ button{
 }
 
 .day:hover{
-  border-color:#3b414b;
-  transform:translateY(-1px);
-}
-
-html[data-theme="light"] .day:hover{
   border-color:#c4c9d1;
+  transform:translateY(-1px);
 }
 
 .day.other{
@@ -249,7 +206,7 @@ html[data-theme="light"] .day:hover{
 }
 
 .day.today{
-  border-color:rgba(212,164,76,.6);
+  border-color:rgba(185,135,58,.6);
 }
 
 .day.selected{
@@ -344,7 +301,7 @@ input:focus{
   border:0;
   border-radius:10px;
   background:var(--gold);
-  color:#17130a;
+  color:#ffffff;
   font-weight:700;
 }
 
@@ -570,16 +527,12 @@ input:focus{
 .modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.65);
+  background:rgba(20,22,26,.35);
   display:none;
   align-items:center;
   justify-content:center;
   padding:20px;
   z-index:10;
-}
-
-html[data-theme="light"] .modal{
-  background:rgba(20,22,26,.35);
 }
 
 .modal.show{
@@ -592,7 +545,7 @@ html[data-theme="light"] .modal{
   border:1px solid var(--border);
   border-radius:18px;
   padding:22px;
-  box-shadow:0 25px 80px rgba(0,0,0,.45);
+  box-shadow:0 25px 80px rgba(0,0,0,.18);
 }
 
 .modal-title{
@@ -631,7 +584,7 @@ html[data-theme="light"] .modal{
   border-radius:10px;
   border:0;
   background:var(--gold);
-  color:#17130a;
+  color:#ffffff;
   font-weight:700;
 }
 
@@ -701,14 +654,6 @@ html[data-theme="light"] .modal{
     </div>
 
     <div class="header-actions">
-
-      <button
-        class="theme-toggle"
-        id="themeToggle"
-        title="Toggle dark / light mode">
-        🌙
-      </button>
-
     </div>
 
   </div>
@@ -1132,7 +1077,6 @@ html[data-theme="light"] .modal{
 <script>
 
 const KEY = "tradeJournal_v1";
-const THEME_KEY = "tradeJournal_theme";
 
 let data = JSON.parse(
   localStorage.getItem(KEY) ||
@@ -1152,67 +1096,6 @@ let view = new Date();
 view.setDate(1);
 
 let selectedDate = localDate(new Date());
-
-
-/* =========================
-   THEME
-========================= */
-
-function applyTheme(theme){
-
-  document.documentElement
-    .setAttribute("data-theme", theme);
-
-  const btn =
-    document.getElementById("themeToggle");
-
-  btn.textContent =
-    theme === "light" ? "☀️" : "🌙";
-
-  localStorage.setItem(THEME_KEY, theme);
-
-}
-
-
-function initTheme(){
-
-  let theme =
-    localStorage.getItem(THEME_KEY);
-
-  if(!theme){
-
-    theme =
-      window.matchMedia &&
-      window.matchMedia(
-        "(prefers-color-scheme: light)"
-      ).matches
-        ? "light"
-        : "dark";
-
-  }
-
-  applyTheme(theme);
-
-}
-
-
-document.getElementById("themeToggle")
-  .onclick = () => {
-
-    const current =
-      document.documentElement
-        .getAttribute("data-theme");
-
-    applyTheme(
-      current === "light"
-        ? "dark"
-        : "light"
-    );
-
-  };
-
-
-initTheme();
 
 
 /* =========================
