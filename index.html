@@ -4,44 +4,53 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trading Tools</title>
+
 <style>
   :root{
     --bg:#f4f5f7;
     --panel:#ffffff;
     --border:#dde0e6;
     --blue:#2563eb;
-    --blue-hi:#1d4ed8;
     --text:#14161a;
     --text-2:#6b717c;
   }
-  *{box-sizing:border-box;}
+
+  *{
+    box-sizing:border-box;
+  }
+
   body{
     margin:0;
     background:var(--bg);
     color:var(--text);
     font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   }
+
   .wrap{
     max-width:640px;
     margin:0 auto;
     padding:64px 24px;
   }
+
   h1{
     font-size:24px;
     font-weight:700;
     letter-spacing:-.5px;
     margin:0 0 8px;
   }
+
   p.sub{
     color:var(--text-2);
     font-size:14px;
     margin:0 0 32px;
   }
+
   .links{
     display:flex;
     flex-direction:column;
     gap:12px;
   }
+
   a.card{
     display:block;
     background:var(--panel);
@@ -53,19 +62,23 @@
     box-shadow:0 8px 24px rgba(20,22,26,.06);
     transition:border-color .15s ease, transform .15s ease;
   }
+
   a.card:hover{
     border-color:var(--blue);
     transform:translateY(-1px);
   }
+
   a.card .name{
     font-weight:700;
     font-size:15px;
   }
+
   a.card .desc{
     margin-top:4px;
     font-size:13px;
     color:var(--text-2);
   }
+
   a.card .arrow{
     float:right;
     color:var(--blue);
@@ -73,22 +86,35 @@
   }
 </style>
 </head>
+
 <body>
+
 <div class="wrap">
+
   <h1>Trading Tools</h1>
   <p class="sub">Pick a page to open.</p>
+
   <div class="links">
-    <a class="card" href="Trade_Journal.html">
+
+    <a class="card" href="./Trade_Journal.html">
       <span class="arrow">→</span>
       <div class="name">Trade Journal</div>
-      <div class="desc">Calendar, P&amp;L stats, and daily loss limit tracking</div>
+      <div class="desc">
+        Calendar, P&amp;L stats, and daily loss limit tracking
+      </div>
     </a>
-    <a class="card" href="Trade_Plan.html">
+
+    <a class="card" href="./Trade_Plan.html">
       <span class="arrow">→</span>
       <div class="name">Trade Plan</div>
-      <div class="desc">Checklist of trading rules to follow before entering</div>
+      <div class="desc">
+        Checklist of trading rules to follow before entering
+      </div>
     </a>
+
   </div>
+
 </div>
+
 </body>
 </html>
