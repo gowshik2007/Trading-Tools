@@ -8,22 +8,22 @@
 <style>
 
 :root{
-  --bg:#f4f5f7;
-  --panel:#ffffff;
-  --panel-hi:#f0f1f4;
-  --border:#dde0e6;
-  --border-soft:#e6e8ec;
-  --text:#14161a;
-  --muted:#6b717c;
-  --faint:#9aa0aa;
-  --gold:#2563eb;
-  --gold-hi:#1d4ed8;
-  --green:#1f9d63;
-  --red:#d8433f;
-  --red-soft:rgba(216,67,63,.10);
+  --bg:#0f1115;
+  --panel:#181b21;
+  --panel-hi:#1f232b;
+  --border:#2a2d35;
+  --border-soft:#252932;
+  --text:#e8e9ec;
+  --muted:#9aa0aa;
+  --faint:#6b717c;
+  --gold:#3b82f6;
+  --gold-hi:#60a5fa;
+  --green:#2fbf7c;
+  --red:#e05c58;
+  --red-soft:rgba(224,92,88,.14);
   --radius:18px;
   --radius-sm:12px;
-  --shadow:0 12px 34px rgba(20,22,26,.08);
+  --shadow:0 12px 34px rgba(0,0,0,.35);
 }
 
 *{
@@ -189,7 +189,7 @@ button{
 }
 
 .day:hover{
-  border-color:#c4c9d1;
+  border-color:#3a3e48;
   transform:translateY(-1px);
 }
 
@@ -198,7 +198,7 @@ button{
 }
 
 .day.today{
-  border-color:rgba(185,135,58,.6);
+  border-color:rgba(96,165,250,.6);
 }
 
 .day.selected{
@@ -293,7 +293,7 @@ input:focus{
   border:0;
   border-radius:10px;
   background:var(--gold);
-  color:#ffffff;
+  color:#0f1115;
   font-weight:700;
 }
 
@@ -519,7 +519,7 @@ input:focus{
 .modal{
   position:fixed;
   inset:0;
-  background:rgba(20,22,26,.35);
+  background:rgba(0,0,0,.55);
   display:none;
   align-items:center;
   justify-content:center;
@@ -537,7 +537,7 @@ input:focus{
   border:1px solid var(--border);
   border-radius:18px;
   padding:22px;
-  box-shadow:0 25px 80px rgba(0,0,0,.18);
+  box-shadow:0 25px 80px rgba(0,0,0,.5);
 }
 
 .modal-title{
@@ -576,7 +576,7 @@ input:focus{
   border-radius:10px;
   border:0;
   background:var(--gold);
-  color:#ffffff;
+  color:#0f1115;
   font-weight:700;
 }
 
